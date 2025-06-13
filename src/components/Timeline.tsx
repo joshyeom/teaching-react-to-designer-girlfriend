@@ -11,21 +11,22 @@ interface TimelineItem {
   time: string;
   title: string;
 }
-
 const timelineItems: TimelineItem[] = [
   { id: "intro", time: "시작", title: "들어가며" },
-  { id: "why", time: "15분", title: "왜 React?" },
-  { id: "component", time: "30분", title: "컴포넌트" },
-  { id: "props", time: "30분", title: "Props" },
-  { id: "children", time: "25분", title: "Children" },
+  { id: "why", time: "10분", title: "왜 React?" },
+  { id: "jsx", time: "15분", title: "JSX" },
+  { id: "component", time: "25분", title: "컴포넌트" },
+  { id: "props", time: "25분", title: "Props" },
+  { id: "children", time: "20분", title: "Children" },
   { id: "event", time: "10분", title: "이벤트" },
-  { id: "project", time: "20분", title: "미니 프로젝트" },
+  { id: "project", time: "15분", title: "미니 프로젝트" },
 ];
 
 function Timeline({ activeSection }: TimelineProps) {
   const progressMap: Record<SectionId, number> = {
     intro: 0,
     why: 15,
+    jsx: 22,
     component: 30,
     props: 50,
     children: 70,

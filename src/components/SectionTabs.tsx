@@ -1,5 +1,4 @@
 // components/SectionTabs.tsx
-import React from "react";
 import { SectionId } from "../App";
 
 interface SectionTabsProps {
@@ -16,6 +15,7 @@ interface Tab {
 const tabs: Tab[] = [
   { id: "intro", label: "들어가며", icon: "🎯" },
   { id: "why", label: "왜 React?", icon: "🤔" },
+  { id: "jsx", label: "JSX", icon: "📝" },
   { id: "component", label: "컴포넌트", icon: "🧩" },
   { id: "props", label: "Props", icon: "📦" },
   { id: "children", label: "Children", icon: "🎁" },

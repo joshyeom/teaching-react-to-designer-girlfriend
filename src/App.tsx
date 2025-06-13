@@ -13,6 +13,7 @@ import PropsSection from "./components/PropsSection";
 import WhyReactSection from "./components/WhyReactSection";
 import MiniProjectPage from "./MiniProjectPage";
 import "./index.css";
+import JSXSection from "./components/JSXSection";
 
 export type SectionId =
   | "intro"
@@ -21,7 +22,8 @@ export type SectionId =
   | "props"
   | "children"
   | "event"
-  | "project";
+  | "project"
+  | "jsx";
 
 function App() {
   const [activeSection, setActiveSection] = useState<SectionId>("intro");
@@ -32,6 +34,8 @@ function App() {
         return <IntroSection />;
       case "why":
         return <WhyReactSection />;
+      case "jsx":
+        return <JSXSection />;
       case "component":
         return <ComponentSection />;
       case "props":
