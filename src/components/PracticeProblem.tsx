@@ -1,7 +1,8 @@
 import { useState } from "react";
+import CodeBlock from "./ui/CodeBlock";
 
 interface Problem {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   starterCode: string;
@@ -40,91 +41,89 @@ export default function PracticeProblems({ problems }: PracticeProblemsProps) {
       </div>
 
       <div className="space-y-6">
-        {problems.map((problem) => (
-          <div
-            key={problem.id}
-            className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden"
-          >
-            <div className="bg-gray-50 p-4 border-b border-gray-200">
-              <h4 className="font-bold text-lg flex items-center gap-2">
-                <span className="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">
-                  {problem.id}
-                </span>
-                {problem.title}
-              </h4>
-              <p className="text-gray-600 mt-2">{problem.description}</p>
-            </div>
-
-            <div className="p-4">
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <label className="font-semibold text-sm text-gray-700">
-                    시작 코드:
-                  </label>
-                  <button
-                    onClick={() =>
-                      copyToClipboard(problem.starterCode, problem.id)
-                    }
-                    className={`px-3 py-1 text-sm rounded-md transition-all ${
-                      copiedId === problem.id
-                        ? "bg-green-500 text-white"
-                        : "bg-indigo-500 text-white hover:bg-indigo-600"
-                    }`}
-                  >
-                    {copiedId === problem.id ? "✓ 복사됨!" : "📋 복사하기"}
-                  </button>
-                </div>
-                <pre className="bg-slate-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
-                  <code>{problem.starterCode}</code>
-                </pre>
+        {problems.map((problem, idx) => {
+          const key = problem.id ?? idx;
+          const id = problem.id ?? idx;
+          return (
+            <div
+              key={key}
+              className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden"
+            >
+              <div className="bg-gray-50 p-4 border-b border-gray-200">
+                <h4 className="font-bold text-lg flex items-center gap-2">
+                  <span className="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">
+                    {problem.id !== undefined ? problem.id : idx + 1}
+                  </span>
+                  {problem.title}
+                </h4>
+                <p className="text-gray-600 mt-2">{problem.description}</p>
               </div>
 
-              {problem.hint && (
+              <div className="p-4">
                 <div className="mb-4">
-                  <button
-                    onClick={() =>
-                      setShowHint({
-                        ...showHint,
-                        [problem.id]: !showHint[problem.id],
-                      })
-                    }
-                    className="text-amber-600 hover:text-amber-700 font-semibold text-sm flex items-center gap-1"
-                  >
-                    💡 힌트 {showHint[problem.id] ? "숨기기" : "보기"}
-                  </button>
-                  {showHint[problem.id] && (
-                    <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm">
-                      {problem.hint}
-                    </div>
-                  )}
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="font-semibold text-sm text-gray-700">
+                      시작 코드:
+                    </label>
+                    <button
+                      onClick={() => copyToClipboard(problem.starterCode, id)}
+                      className={`px-3 py-1 text-sm rounded-md transition-all ${
+                        copiedId === id
+                          ? "bg-green-500 text-white"
+                          : "bg-indigo-500 text-white hover:bg-indigo-600"
+                      }`}
+                    >
+                      {copiedId === id ? "✓ 복사됨!" : "📋 복사하기"}
+                    </button>
+                  </div>
+                  <CodeBlock code={problem.starterCode} />
                 </div>
-              )}
 
-              {problem.solution && (
-                <div>
-                  <button
-                    onClick={() =>
-                      setShowSolution({
-                        ...showSolution,
-                        [problem.id]: !showSolution[problem.id],
-                      })
-                    }
-                    className="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center gap-1"
-                  >
-                    ✅ 정답 {showSolution[problem.id] ? "숨기기" : "보기"}
-                  </button>
-                  {showSolution[problem.id] && (
-                    <div className="mt-2">
-                      <pre className="bg-green-50 border border-green-200 p-4 rounded-lg overflow-x-auto text-sm">
-                        <code>{problem.solution}</code>
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              )}
+                {problem.hint && (
+                  <div className="mb-4">
+                    <button
+                      onClick={() =>
+                        setShowHint({
+                          ...showHint,
+                          [id]: !showHint[id],
+                        })
+                      }
+                      className="text-amber-600 hover:text-amber-700 font-semibold text-sm flex items-center gap-1"
+                    >
+                      💡 힌트 {showHint[id] ? "숨기기" : "보기"}
+                    </button>
+                    {showHint[id] && (
+                      <div className="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm">
+                        {problem.hint}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {problem.solution && (
+                  <div>
+                    <button
+                      onClick={() =>
+                        setShowSolution({
+                          ...showSolution,
+                          [id]: !showSolution[id],
+                        })
+                      }
+                      className="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center gap-1"
+                    >
+                      ✅ 정답 {showSolution[id] ? "숨기기" : "보기"}
+                    </button>
+                    {showSolution[id] && (
+                      <div className="mt-2">
+                        <CodeBlock code={problem.solution || ""} />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">

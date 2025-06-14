@@ -82,6 +82,31 @@ return (
     </div>
   );
 
+  const problems = [
+    {
+      title: "HTML을 JSX로 고치기",
+      description: "아래 HTML 코드를 JSX로 변환해보세요.",
+      starterCode: `<div class="card">\n  <h1>제목</h1>\n  <img src="photo.jpg">\n  <button onclick="alert('클릭!')">클릭</button>\n</div>`,
+      hint: "class → className, onclick → onClick, 태그 닫기, 중괄호 사용",
+      solution: `<div className="card">\n  <h1>제목</h1>\n  <img src="photo.jpg" />\n  <button onClick={() => alert('클릭!')}>클릭</button>\n</div>`,
+    },
+    {
+      title: "JSX 문법 오류 고치기",
+      description: "아래 코드의 잘못된 부분을 모두 고쳐보세요.",
+      starterCode: `<div>\n  <h2>안녕</h2>\n  <img src="hi.png">\n  <p>{2 + 2 = 4}</p>\n</div>`,
+      hint: "img 태그 닫기, 중괄호 안에는 표현식만",
+      solution: `<div>\n  <h2>안녕</h2>\n  <img src="hi.png" />\n  <p>{2 + 2 === 4 ? "정답" : "오답"}</p>\n</div>`,
+    },
+    {
+      title: "조건부 렌더링 사용하기",
+      description:
+        'isLogin 값에 따라 "환영합니다!" 또는 "로그인 해주세요"가 보이게 만들어보세요.',
+      starterCode: `const isLogin = true;\n\nreturn (\n  <div>\n    {/* 여기에 조건부 렌더링을 추가하세요 */}\n  </div>\n);`,
+      hint: "{isLogin ? ... : ...} 또는 && 연산자를 사용하세요.",
+      solution: `const isLogin = true;\n\nreturn (\n  <div>\n    {isLogin ? "환영합니다!" : "로그인 해주세요"}\n  </div>\n);`,
+    },
+  ];
+
   return (
     <ContentCard>
       <h2 className="text-3xl font-bold mb-8 text-gray-800">
@@ -210,6 +235,9 @@ return (
           </div>
         </div>
       </div>
+
+      {/* JSX 연습문제 추가 */}
+      <PracticeProblems problems={problems} />
 
       <TipsBox
         title="💡 JSX 꿀팁"

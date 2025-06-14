@@ -25,6 +25,31 @@ function EventSection() {
     alert("안녕! 👋");
   };
 
+  const problems = [
+    {
+      title: "버튼 클릭하면 인사하기",
+      description: '버튼을 클릭하면 "안녕!"이라는 알림이 뜨게 만들어보세요.',
+      starterCode: `function HelloButton() {\n  return (\n    <button>인사하기</button>\n  );\n}`,
+      hint: "onClick 속성에 함수를 넣으세요.",
+      solution: `function HelloButton() {\n  return (\n    <button onClick={() => alert(\"안녕!\")}>인사하기</button>\n  );\n}`,
+    },
+    {
+      title: "버튼 클릭하면 다른 알림 띄우기",
+      description: '버튼을 클릭하면 "반가워!"라는 알림이 뜨게 만들어보세요.',
+      starterCode: `function GreetButton() {\n  return (\n    <button>반가워 버튼</button>\n  );\n}`,
+      hint: "onClick 속성에 함수를 넣으세요.",
+      solution: `function GreetButton() {\n  return (\n    <button onClick={() => alert(\"반가워!\")}>반가워 버튼</button>\n  );\n}`,
+    },
+    {
+      title: "버튼에 마우스 올리면 알림 띄우기",
+      description:
+        '버튼에 마우스를 올리면 "호버!"라는 알림이 뜨게 만들어보세요.',
+      starterCode: `function HoverAlertButton() {\n  return (\n    <button>호버 버튼</button>\n  );\n}`,
+      hint: "onMouseOver 속성에 함수를 넣으세요.",
+      solution: `function HoverAlertButton() {\n  return (\n    <button onMouseOver={() => alert(\"호버!\")}>호버 버튼</button>\n  );\n}`,
+    },
+  ];
+
   return (
     <ContentCard>
       <h2 className="text-3xl font-bold mb-8 text-gray-800">
@@ -56,6 +81,8 @@ function EventSection() {
           </>
         }
       />
+
+      <PracticeProblems problems={problems} />
     </ContentCard>
   );
 }

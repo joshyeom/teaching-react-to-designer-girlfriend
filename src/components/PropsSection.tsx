@@ -2,6 +2,7 @@ import CodeExample from "./ui/CodeExample";
 import ConceptComparison from "./ui/ConceptComparison";
 import ContentCard from "./ui/ContentCard";
 import TipsBox from "./ui/TipsBox";
+import PracticeProblems from "./PracticeProblem";
 
 function PropsSection() {
   const code = `<Button 
@@ -31,6 +32,30 @@ function PropsSection() {
     </div>
   );
 
+  const problems = [
+    {
+      title: "props로 버튼 텍스트 바꾸기",
+      description: "text라는 props로 버튼의 텍스트를 바꿔보세요.",
+      starterCode: `function Button({ text }) {\n  return <button>여기에 텍스트</button>;\n}\n\n// <Button text=\"저장하기\" />를 사용하면 버튼에 \"저장하기\"가 보여야 해요.`,
+      hint: "text를 {text}로 사용하세요.",
+      solution: `function Button({ text }) {\n  return <button>{text}</button>;\n}`,
+    },
+    {
+      title: "props로 버튼 색상 바꾸기",
+      description: "color라는 props로 버튼의 배경색을 바꿔보세요.",
+      starterCode: `function Button({ text, color }) {\n  return <button>{text}</button>;\n}\n\n// <Button text=\"빨강\" color=\"red\" /> 처럼 사용해보세요.`,
+      hint: "style 속성에 color를 적용하세요.",
+      solution: `function Button({ text, color }) {\n  return <button style={{ backgroundColor: color }}>{text}</button>;\n}`,
+    },
+    {
+      title: "props로 다양한 버튼 만들기",
+      description: "text, color, size props로 다양한 버튼을 만들어보세요.",
+      starterCode: `function Button({ text, color, size }) {\n  // 여기에 코드를 작성하세요\n  return <button>{text}</button>;\n}\n\n// <Button text=\"큰 파랑\" color=\"blue\" size=\"24px\" /> 처럼 사용해보세요.`,
+      hint: "style에 color와 fontSize를 적용하세요.",
+      solution: `function Button({ text, color, size }) {\n  return <button style={{ backgroundColor: color, fontSize: size }}>{text}</button>;\n}`,
+    },
+  ];
+
   return (
     <ContentCard>
       <h2 className="text-3xl font-bold mb-8 text-gray-800">
@@ -51,6 +76,7 @@ function PropsSection() {
         title="💡 Props = Properties = 속성"
         content="부모가 자식에게 정보를 전달하는 방법이에요. Figma의 Component Properties와 똑같은 개념!"
       />
+      <PracticeProblems problems={problems} />
     </ContentCard>
   );
 }
