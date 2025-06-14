@@ -1,8 +1,7 @@
-import React from "react";
+import PracticeProblems from "./PracticeProblem";
 import CodeExample from "./ui/CodeExample";
 import ContentCard from "./ui/ContentCard";
 import TipsBox from "./ui/TipsBox";
-import CodeBlock from "./ui/CodeBlock";
 
 function JSXSection() {
   const jsxCode = `// JSX는 JavaScript 안에서 HTML처럼 쓰는 문법이에요!
@@ -14,6 +13,7 @@ function Welcome() {
     <div>
       <h1>안녕하세요, {name}님! 👋</h1>
       <p>오늘 기분이 {isHappy ? "좋으시" : "안 좋으시"}네요!</p>
+      <img src="profile.jpg" alt="프로필" />
       <button onClick={() => alert('클릭!')}>
         클릭해보세요
       </button>
@@ -68,6 +68,11 @@ return (
     <div className="p-4 bg-white rounded-lg shadow">
       <h1 className="text-xl font-bold mb-2">안녕하세요, 김디자이너님! 👋</h1>
       <p className="text-gray-600 mb-3">오늘 기분이 좋으시네요!</p>
+      <img
+        src="https://via.placeholder.com/100x100/667eea/ffffff?text=Profile"
+        alt="프로필"
+        className="rounded-full w-20 h-20 mb-3"
+      />
       <button
         onClick={() => alert("클릭!")}
         className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
@@ -111,7 +116,13 @@ return (
       <div className="mb-8">
         <h3 className="text-2xl font-semibold mb-4">🔄 HTML vs JSX 차이점</h3>
         <div className="bg-gray-50 p-6 rounded-xl">
-          <CodeBlock code={htmlVsJsx} language="jsx" />
+          <pre className="text-sm overflow-x-auto">
+            <code
+              dangerouslySetInnerHTML={{
+                __html: htmlVsJsx.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+              }}
+            />
+          </pre>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4 mt-6">
@@ -152,7 +163,11 @@ return (
         <h3 className="text-2xl font-semibold mb-4">
           📏 꼭 기억해야 할 JSX 규칙
         </h3>
-        <CodeBlock code={jsxRules} language="jsx" />
+        <div className="bg-slate-800 text-gray-200 p-6 rounded-xl">
+          <pre className="text-sm overflow-x-auto">
+            <code>{jsxRules}</code>
+          </pre>
+        </div>
       </div>
 
       {/* 실습 예제 */}
@@ -164,26 +179,34 @@ return (
         <div className="space-y-4">
           <div className="bg-white p-4 rounded-lg">
             <p className="font-semibold mb-2">1️⃣ 변수 표시하기</p>
-            <CodeBlock
-              code={`const price = 139000;\nreturn <p>가격: {price.toLocaleString()}원</p>;`}
-              language="jsx"
-            />
+            <code className="block bg-gray-100 p-3 rounded text-sm">
+              {`const price = 139000;
+return <p>가격: {price.toLocaleString()}원</p>;`}
+            </code>
           </div>
 
           <div className="bg-white p-4 rounded-lg">
             <p className="font-semibold mb-2">2️⃣ 조건에 따라 다르게 보여주기</p>
-            <CodeBlock
-              code={`const isSoldOut = false;\nreturn (\n  <button className={isSoldOut ? "disabled" : "active"}>\n    {isSoldOut ? "품절" : "구매하기"}\n  </button>\n);`}
-              language="jsx"
-            />
+            <code className="block bg-gray-100 p-3 rounded text-sm">
+              {`const isSoldOut = false;
+return (
+  <button className={isSoldOut ? "disabled" : "active"}>
+    {isSoldOut ? "품절" : "구매하기"}
+  </button>
+);`}
+            </code>
           </div>
 
           <div className="bg-white p-4 rounded-lg">
             <p className="font-semibold mb-2">3️⃣ 리스트 만들기</p>
-            <CodeBlock
-              code={`const colors = ["빨강", "파랑", "노랑"];\nreturn (\n  <ul>\n    {colors.map(color => <li key={color}>{color}</li>)}\n  </ul>\n);`}
-              language="jsx"
-            />
+            <code className="block bg-gray-100 p-3 rounded text-sm">
+              {`const colors = ["빨강", "파랑", "노랑"];
+return (
+  <ul>
+    {colors.map(color => <li key={color}>{color}</li>)}
+  </ul>
+);`}
+            </code>
           </div>
         </div>
       </div>
@@ -233,9 +256,9 @@ return (
           <div>
             <span className="font-semibold">❌ onclick="handleClick()"</span>
             <span className="mx-2">→</span>
-            {/* <span className="font-semibold text-green-700">
-              ✅ onClick={handleClick}
-            </span> */}
+            <span className="font-semibold text-green-700">
+              ✅ {"onClick={handleClick}"}
+            </span>
           </div>
         </div>
       </div>

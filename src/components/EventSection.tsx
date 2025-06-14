@@ -1,8 +1,8 @@
+import PracticeProblems from "./PracticeProblem";
 import CodeBlock from "./ui/CodeBlock";
 import ContentCard from "./ui/ContentCard";
 import TipsBox from "./ui/TipsBox";
 
-// components/sections/EventSection.tsx
 function EventSection() {
   const code = `function Button({ text, onClick }) {
   return (

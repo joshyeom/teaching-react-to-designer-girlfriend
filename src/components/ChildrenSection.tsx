@@ -1,3 +1,4 @@
+import PracticeProblems from "./PracticeProblem";
 import CodeBlock from "./ui/CodeBlock";
 import ContentCard from "./ui/ContentCard";
 
