@@ -1,9 +1,11 @@
-import ChecklistItem from "./ui/CheckList";
-import CodeExample from "./ui/CodeExample";
-import ContentCard from "./ui/ContentCard";
+import {
+  CheckList as ChecklistItem,
+  CodeExample,
+  ContentCard,
+} from "~/shared/ui";
 import PracticeProblems from "./PracticeProblem";
 
-function ComponentSection() {
+export const ComponentSection = () => {
   const code = `// 버튼 컴포넌트 만들기
 function Button() {
   return (
@@ -79,6 +81,4 @@ function Button() {
       <PracticeProblems problems={problems} />
     </ContentCard>
   );
-}
-
-export default ComponentSection;
+};

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CodeBlock from "./ui/CodeBlock";
+import { CodeBlock } from "~/shared/ui";
 
 interface Problem {
   id?: number;

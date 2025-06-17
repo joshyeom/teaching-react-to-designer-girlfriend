@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "barrels": "barrelsby --directory src --exclude \".*\\.d\\.ts$|.*\\.spec\\.ts$|.*\\.test\\.ts$\"",
+    "barrels:widgets": "barrelsby --directory src/widgets"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.2",
@@ -32,6 +34,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
+    "barrelsby": "^2.8.1",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",

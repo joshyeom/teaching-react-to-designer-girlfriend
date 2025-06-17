@@ -1,5 +1,5 @@
 // components/SectionTabs.tsx
-import { SectionId } from "../App";
+import { SectionId } from "~/pages/main";
 
 interface SectionTabsProps {
   activeSection: SectionId;
@@ -23,7 +23,10 @@ const tabs: Tab[] = [
   { id: "project", label: "최종 프로젝트", icon: "🏆" },
 ];
 
-function SectionTabs({ activeSection, onSectionChange }: SectionTabsProps) {
+export const SectionTabs = ({
+  activeSection,
+  onSectionChange,
+}: SectionTabsProps) => {
   return (
     <div className="flex flex-wrap gap-2 mb-8">
       {tabs.map((tab) => (
@@ -42,6 +45,4 @@ function SectionTabs({ activeSection, onSectionChange }: SectionTabsProps) {
       ))}
     </div>
   );
-}
-
-export default SectionTabs;
+};

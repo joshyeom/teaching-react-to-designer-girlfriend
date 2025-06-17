@@ -1,7 +1,6 @@
-import ConceptComparison from "./ui/ConceptComparison";
-import ContentCard from "./ui/ContentCard";
+import { ConceptComparison, ContentCard } from "~/shared/ui";
 
-function WhyReactSection() {
+export const WhyReactSection = () => {
   return (
     <ContentCard>
       <h2 className="text-3xl font-bold mb-8 text-gray-800">
@@ -64,6 +63,4 @@ function WhyReactSection() {
       </div>
     </ContentCard>
   );
-}
-
-export default WhyReactSection;
+};

@@ -1,12 +1,8 @@
-import ContentCard from "./ui/ContentCard";
-import TipsBox from "./ui/TipsBox";
+import { ContentCard, TipsBox } from "~/shared/ui";
 import { useNavigate } from "react-router-dom";
 
-function ProjectSection() {
+export const ProjectSection = () => {
   const navigate = useNavigate();
-  const handleGreeting = () => {
-    alert("안녕하세요! 👋");
-  };
 
   return (
     <>
@@ -81,6 +77,4 @@ function ProjectSection() {
       </ContentCard>
     </>
   );
-}
-
-export default ProjectSection;
+};

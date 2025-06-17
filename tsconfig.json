@@ -29,7 +29,8 @@
     "module": "esnext",                                 /* Specify what module code is generated. */
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "~/*": ["./*"]
     },
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "Node",

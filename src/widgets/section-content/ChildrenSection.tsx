@@ -1,8 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
-import CodeBlock from "./ui/CodeBlock";
-import ContentCard from "./ui/ContentCard";
+import { CodeBlock, ContentCard } from "~/shared/ui";
 
-function ChildrenSection() {
+export const ChildrenSection = () => {
   const code = `// Card 컴포넌트 (Frame 역할)
 function Card({ children }) {
   return <div className="card">{children}</div>;
@@ -84,6 +83,4 @@ function Card({ children }) {
       <PracticeProblems problems={problems} />
     </ContentCard>
   );
-}
-
-export default ChildrenSection;
+};

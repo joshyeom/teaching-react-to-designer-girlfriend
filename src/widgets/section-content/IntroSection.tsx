@@ -1,8 +1,8 @@
 // components/sections/IntroSection.tsx
 
-import ContentCard from "./ui/ContentCard";
+import { ContentCard } from "~/shared/ui";
 
-function IntroSection() {
+export const IntroSection = () => {
   return (
     <ContentCard>
       <div className="text-center mb-8">
@@ -41,6 +41,4 @@ function IntroSection() {
       </div>
     </ContentCard>
   );
-}
-
-export default IntroSection;
+};

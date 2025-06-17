@@ -1,4 +1,4 @@
-import ProductCard from "./components/ui/ProductCard";
+import { ProductCard } from "~/shared/ui";
 import { useCallback, useState } from "react";
 
 const products = [

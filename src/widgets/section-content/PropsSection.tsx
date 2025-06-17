@@ -1,10 +1,12 @@
-import CodeExample from "./ui/CodeExample";
-import ConceptComparison from "./ui/ConceptComparison";
-import ContentCard from "./ui/ContentCard";
-import TipsBox from "./ui/TipsBox";
+import {
+  CodeExample,
+  ConceptComparison,
+  ContentCard,
+  TipsBox,
+} from "~/shared/ui";
 import PracticeProblems from "./PracticeProblem";
 
-function PropsSection() {
+export const PropsSection = () => {
   const code = `<Button 
   text="저장하기" 
   variant="primary" 
@@ -79,6 +81,4 @@ function PropsSection() {
       <PracticeProblems problems={problems} />
     </ContentCard>
   );
-}
-
-export default PropsSection;
+};

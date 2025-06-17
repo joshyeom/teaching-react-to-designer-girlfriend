@@ -1,6 +1,6 @@
 // components/Timeline.tsx
 import React from "react";
-import { SectionId } from "../App";
+import { SectionId } from "~/pages/main";
 
 interface TimelineProps {
   activeSection: SectionId;
@@ -22,7 +22,7 @@ const timelineItems: TimelineItem[] = [
   { id: "project", time: "15분", title: "미니 프로젝트" },
 ];
 
-function Timeline({ activeSection }: TimelineProps) {
+export const Timeline = ({ activeSection }: TimelineProps) => {
   const progressMap: Record<SectionId, number> = {
     intro: 0,
     why: 15,
@@ -77,6 +77,4 @@ function Timeline({ activeSection }: TimelineProps) {
       </div>
     </div>
   );
-}
-
-export default Timeline;
+};

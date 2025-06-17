@@ -1,9 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
-import CodeBlock from "./ui/CodeBlock";
-import ContentCard from "./ui/ContentCard";
-import TipsBox from "./ui/TipsBox";
+import { CodeBlock, ContentCard, TipsBox } from "~/shared/ui";
 
-function EventSection() {
+export const EventSection = () => {
   const code = `function Button({ text, onClick }) {
   return (
     <button 
@@ -85,6 +83,4 @@ function EventSection() {
       <PracticeProblems problems={problems} />
     </ContentCard>
   );
-}
-
-export default EventSection;
+};

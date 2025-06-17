@@ -1,9 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
-import CodeExample from "./ui/CodeExample";
-import ContentCard from "./ui/ContentCard";
-import TipsBox from "./ui/TipsBox";
+import { CodeExample, ContentCard, TipsBox } from "~/shared/ui";
 
-function JSXSection() {
+export const JSXSection = () => {
   const jsxCode = `// JSX는 JavaScript 안에서 HTML처럼 쓰는 문법이에요!
 function Welcome() {
   const name = "김디자이너";
@@ -292,6 +290,4 @@ return (
       </div>
     </ContentCard>
   );
-}
-
-export default JSXSection;
+};
