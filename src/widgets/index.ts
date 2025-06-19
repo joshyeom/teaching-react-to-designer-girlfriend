@@ -6,3 +6,4 @@ export * from "./layout/Header";
 export * from "./navigation/SectionTabs";
 export * from "./navigation/Timeline";
 export * from "./tutorial-steps/index";
+export * from "./exercise-steps/index";

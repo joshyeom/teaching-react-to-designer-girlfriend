@@ -1,11 +1,11 @@
 import { AppProviders } from "./providers";
-import { AppRouting } from "./routing";
+import { AppRouter } from "./routing";
 import "~/shared/config/index.css";
 
 function App() {
   return (
     <AppProviders>
-      <AppRouting />
+      <AppRouter />
     </AppProviders>
   );
 }
