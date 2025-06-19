@@ -6,7 +6,7 @@ import {
 } from "~/shared/ui";
 import PracticeProblems from "./PracticeProblem";
 
-export const PropsSection = () => {
+export const Step5Props = () => {
   const code = `<Button 
   text="저장하기" 
   variant="primary" 

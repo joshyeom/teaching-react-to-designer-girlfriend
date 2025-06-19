@@ -1,7 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
 import { CodeBlock, ContentCard } from "~/shared/ui";
 
-export const ChildrenSection = () => {
+export const Step6Children = () => {
   const code = `// Card 컴포넌트 (Frame 역할)
 function Card({ children }) {
   return <div className="card">{children}</div>;

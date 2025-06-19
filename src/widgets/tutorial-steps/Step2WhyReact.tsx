@@ -1,6 +1,6 @@
 import { ConceptComparison, ContentCard } from "~/shared/ui";
 
-export const WhyReactSection = () => {
+export const Step2WhyReact = () => {
   return (
     <ContentCard>
       <h2 className="text-3xl font-bold mb-8 text-gray-800">

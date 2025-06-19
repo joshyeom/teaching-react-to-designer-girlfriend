@@ -3,14 +3,14 @@ import {
   Header,
   Timeline,
   SectionTabs,
-  IntroSection,
-  WhyReactSection,
-  JSXSection,
-  ComponentSection,
-  PropsSection,
-  ChildrenSection,
-  EventSection,
-  ProjectSection,
+  Step1Intro,
+  Step2WhyReact,
+  Step4JSX,
+  Step3Component,
+  Step5Props,
+  Step6Children,
+  Step7Events,
+  Step8Project,
 } from "~/widgets";
 
 export type SectionId =
@@ -29,23 +29,23 @@ export function MainPage() {
   const renderSection = () => {
     switch (activeSection) {
       case "intro":
-        return <IntroSection />;
+        return <Step1Intro />;
       case "why":
-        return <WhyReactSection />;
+        return <Step2WhyReact />;
       case "jsx":
-        return <JSXSection />;
+        return <Step4JSX />;
       case "component":
-        return <ComponentSection />;
+        return <Step3Component />;
       case "props":
-        return <PropsSection />;
+        return <Step5Props />;
       case "children":
-        return <ChildrenSection />;
+        return <Step6Children />;
       case "event":
-        return <EventSection />;
+        return <Step7Events />;
       case "project":
-        return <ProjectSection />;
+        return <Step8Project />;
       default:
-        return <IntroSection />;
+        return <Step1Intro />;
     }
   };
 

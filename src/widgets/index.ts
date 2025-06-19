@@ -5,4 +5,4 @@
 export * from "./layout/Header";
 export * from "./navigation/SectionTabs";
 export * from "./navigation/Timeline";
-export * from "./section-content/index";
+export * from "./tutorial-steps/index";

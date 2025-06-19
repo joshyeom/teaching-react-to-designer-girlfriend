@@ -1,8 +1,6 @@
-// components/sections/IntroSection.tsx
-
 import { ContentCard } from "~/shared/ui";
 
-export const IntroSection = () => {
+export const Step1Intro = () => {
   return (
     <ContentCard>
       <div className="text-center mb-8">

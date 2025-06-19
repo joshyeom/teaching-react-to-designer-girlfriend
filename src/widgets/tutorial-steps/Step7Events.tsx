@@ -1,7 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
 import { CodeBlock, ContentCard, TipsBox } from "~/shared/ui";
 
-export const EventSection = () => {
+export const Step7Events = () => {
   const code = `function Button({ text, onClick }) {
   return (
     <button 

@@ -5,7 +5,7 @@ import {
 } from "~/shared/ui";
 import PracticeProblems from "./PracticeProblem";
 
-export const ComponentSection = () => {
+export const Step3Component = () => {
   const code = `// 버튼 컴포넌트 만들기
 function Button() {
   return (

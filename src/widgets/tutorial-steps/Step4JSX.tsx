@@ -1,7 +1,7 @@
 import PracticeProblems from "./PracticeProblem";
 import { CodeExample, ContentCard, TipsBox } from "~/shared/ui";
 
-export const JSXSection = () => {
+export const Step4JSX = () => {
   const jsxCode = `// JSX는 JavaScript 안에서 HTML처럼 쓰는 문법이에요!
 function Welcome() {
   const name = "김디자이너";

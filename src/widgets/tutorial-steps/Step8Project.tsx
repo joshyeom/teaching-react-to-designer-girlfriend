@@ -1,7 +1,7 @@
 import { ContentCard, TipsBox } from "~/shared/ui";
 import { useNavigate } from "react-router-dom";
 
-export const ProjectSection = () => {
+export const Step8Project = () => {
   const navigate = useNavigate();
 
   return (
