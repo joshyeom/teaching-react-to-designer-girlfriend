@@ -75,6 +75,10 @@ const router = createBrowserRouter([
     element: <ExercisePage />,
   },
   {
+    path: "/hidden-level",
+    element: <ExercisePage />,
+  },
+  {
     path: "/mini-project",
     element: <MiniProjectPage />,
   },

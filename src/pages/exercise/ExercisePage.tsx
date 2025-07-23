@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Header } from "~/widgets";
+import { ExerciseHiddenLevel } from "~/widgets/exercise-steps";
 
 export type ExerciseId = string;
 
@@ -1822,6 +1823,7 @@ function ExerciseNavigation({
     8: "리스트 렌더링",
     9: "복합 컴포넌트",
     10: "미니 프로젝트",
+    999: "Hidden Level",
   };
 
   const levelEmojis: Record<number, string> = {
@@ -1835,6 +1837,7 @@ function ExerciseNavigation({
     8: "📋",
     9: "🏗️",
     10: "🚀",
+    999: "🎯",
   };
 
   const currentLevelSteps = groupedSteps[selectedCategory] || [];
@@ -1850,56 +1853,86 @@ function ExerciseNavigation({
 
       {/* 카테고리 탭 */}
       <div className="flex flex-wrap gap-2 mb-6 p-2 bg-gray-50 rounded-xl">
-        {Object.entries(levelNames).map(([level, name]) => (
-          <button
-            key={level}
-            onClick={() => onCategoryChange(Number(level))}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-              selectedCategory === Number(level)
-                ? "bg-blue-500 text-white shadow-md"
-                : "text-gray-600 hover:bg-white hover:shadow-sm"
-            }`}
-          >
-            <span className="mr-2">{levelEmojis[Number(level)]}</span>
-            Level {level}: {name}
-          </button>
-        ))}
+        {Object.entries(levelNames).map(([level, name]) => {
+          const levelNum = Number(level);
+          const isHiddenLevel = levelNum === 999;
+          
+          return (
+            <button
+              key={level}
+              onClick={() => onCategoryChange(levelNum)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                selectedCategory === levelNum
+                  ? isHiddenLevel 
+                    ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md"
+                    : "bg-blue-500 text-white shadow-md"
+                  : "text-gray-600 hover:bg-white hover:shadow-sm"
+              } ${isHiddenLevel ? 'border-2 border-purple-300 bg-gradient-to-r from-purple-50 to-pink-50' : ''}`}
+            >
+              <span className="mr-2">{levelEmojis[levelNum]}</span>
+              {isHiddenLevel ? "🎯 Hidden Level" : `Level ${level}: ${name}`}
+            </button>
+          );
+        })}
       </div>
 
       {/* 선택된 카테고리의 문제들 */}
       <div className="mb-4">
         <h3 className="text-lg font-bold mb-4 text-purple-600 flex items-center gap-2">
           <span className="text-2xl">{levelEmojis[selectedCategory]}</span>
-          Level {selectedCategory}: {levelNames[selectedCategory]}
+          {selectedCategory === 999 ? "🎯 Hidden Level" : `Level ${selectedCategory}: ${levelNames[selectedCategory]}`}
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {currentLevelSteps.map((step) => (
-            <button
-              key={step.id}
-              onClick={() => onStepChange(step.id)}
-              className={`p-4 rounded-xl border-2 transition-all duration-300 text-left hover:scale-105 ${
-                activeStep === step.id
-                  ? "border-blue-500 bg-blue-50 shadow-lg"
-                  : "border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-              }`}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-bold text-sm text-purple-600">
-                  문제 {step.id}
-                </span>
-                <div className="flex items-center gap-1 text-yellow-500">
-                  {"★".repeat(step.difficulty)}
+        
+        {selectedCategory === 999 ? (
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-xl p-6">
+            <div className="text-center">
+              <div className="text-4xl mb-4">🎯✨</div>
+              <h4 className="text-xl font-bold text-purple-800 mb-2">Hidden Level 발견!</h4>
+              <p className="text-purple-600 mb-4">
+                Level 1~3의 모든 내용을 종합한 실전 문제 10개가 준비되어 있습니다.
+              </p>
+              <div className="flex justify-center gap-2 text-sm text-purple-500 mb-4">
+                <span>⭐⭐ ~ ⭐⭐⭐⭐⭐</span>
+                <span>•</span>
+                <span>실전 컴포넌트</span>
+                <span>•</span>
+                <span>종합 문제</span>
+              </div>
+              <p className="text-sm text-gray-600">
+                💡 JSX, 컴포넌트, 스타일링을 모두 마스터했다면 도전해보세요!
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {currentLevelSteps.map((step) => (
+              <button
+                key={step.id}
+                onClick={() => onStepChange(step.id)}
+                className={`p-4 rounded-xl border-2 transition-all duration-300 text-left hover:scale-105 ${
+                  activeStep === step.id
+                    ? "border-blue-500 bg-blue-50 shadow-lg"
+                    : "border-gray-200 hover:border-blue-300 hover:bg-blue-50"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-sm text-purple-600">
+                    문제 {step.id}
+                  </span>
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    {"★".repeat(step.difficulty)}
+                  </div>
                 </div>
-              </div>
-              <div className="text-sm font-medium text-gray-800 leading-tight mb-1">
-                {step.title}
-              </div>
-              <div className="text-xs text-gray-500 leading-relaxed">
-                {step.description}
-              </div>
-            </button>
-          ))}
-        </div>
+                <div className="text-sm font-medium text-gray-800 leading-tight mb-1">
+                  {step.title}
+                </div>
+                <div className="text-xs text-gray-500 leading-relaxed">
+                  {step.description}
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1938,6 +1971,9 @@ function ProgressBar({
 
 export function ExercisePage() {
   const { problemId } = useParams();
+  const location = useLocation();
+  const isHiddenLevel = location.pathname === '/hidden-level';
+  
   const [activeStep, setActiveStep] = useState<number>(
     problemId ? parseInt(problemId) : 1
   );
@@ -1945,7 +1981,7 @@ export function ExercisePage() {
   // selectedCategory 상태를 여기로 이동
   const currentStep = exerciseSteps.find((s) => s.id === activeStep);
   const [selectedCategory, setSelectedCategory] = useState<number>(
-    currentStep?.level || 1
+    isHiddenLevel ? 999 : (currentStep?.level || 1)
   );
 
   // activeStep이 변경될 때 selectedCategory도 자동으로 업데이트
@@ -1977,6 +2013,15 @@ export function ExercisePage() {
   };
 
   const renderExercise = () => {
+    if (selectedCategory === 999) {
+      return (
+        <ExerciseHiddenLevel 
+          onComplete={() => console.log('Hidden Level completed!')}
+          onNext={() => console.log('Hidden Level next!')}
+        />
+      );
+    }
+
     if (!currentStep) return null;
 
     return <ExerciseProblemView problem={currentStep} onNext={handleNext} />;
