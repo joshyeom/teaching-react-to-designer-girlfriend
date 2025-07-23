@@ -24,816 +24,1124 @@ export function ExerciseHiddenLevel({ onComplete, onNext }: ExerciseProps) {
 
   const problems = {
     1: {
-      title: "문제 H-1: 동적 스타일 카드 ⭐⭐",
-      description: "props에 따라 스타일이 변하는 카드 컴포넌트 만들기",
+      title: "문제 H-1: 멋진 명함 카드 ⭐⭐",
+      description: "회사 명함처럼 보이는 카드 컴포넌트 만들기",
       example: `// 요구사항:
-// - isHighlighted가 true면 파란색 테두리
-// - cardType이 'success'면 초록색 배경
-// - cardType이 'warning'이면 노란색 배경
-// - title과 content를 표시`,
-      hint: "삼항 연산자나 조건부 렌더링을 활용하세요",
-      solution: `function DynamicCard({ isHighlighted, cardType, title, content }) {
-  const getBackgroundColor = () => {
-    if (cardType === 'success') return '#f0f9f0';
-    if (cardType === 'warning') return '#fff9e6';
-    return '#ffffff';
-  };
-
+// - 이름, 직책, 회사, 이메일을 표시
+// - 카드 형태의 디자인 (그림자, 둥근 모서리)
+// - 회사 로고 영역 (색상 박스로 대체)
+// - 깔끔한 레이아웃`,
+      hint: "div로 구조를 잡고 인라인 스타일로 꾸며보세요",
+      solution: `function BusinessCard() {
   return (
     <div style={{
-      backgroundColor: getBackgroundColor(),
-      border: isHighlighted ? '2px solid #3b82f6' : '1px solid #e5e7eb',
-      borderRadius: '8px',
-      padding: '16px',
-      margin: '8px'
+      width: '320px',
+      padding: '24px',
+      backgroundColor: 'white',
+      borderRadius: '12px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      border: '1px solid #e5e7eb'
     }}>
-      <h3 style={{ margin: '0 0 8px 0', fontWeight: 'bold' }}>{title}</h3>
-      <p style={{ margin: 0, color: '#666' }}>{content}</p>
+      <div style={{
+        width: '60px',
+        height: '60px',
+        backgroundColor: '#3b82f6',
+        borderRadius: '8px',
+        marginBottom: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        fontSize: '24px',
+        fontWeight: 'bold'
+      }}>
+        A
+      </div>
+      <h2 style={{ margin: '0 0 4px 0', fontSize: '22px', color: '#1f2937' }}>김세진</h2>
+      <p style={{ margin: '0 0 8px 0', color: '#6b7280', fontSize: '16px' }}>UI/UX 디자이너</p>
+      <p style={{ margin: '0 0 12px 0', color: '#9ca3af', fontSize: '14px' }}>아이디어 컴퍼니</p>
+      <p style={{ margin: 0, color: '#3b82f6', fontSize: '14px' }}>sejin@company.com</p>
     </div>
   );
 }`,
-      placeholder: `function DynamicCard({ isHighlighted, cardType, title, content }) {
+      placeholder: `function BusinessCard() {
   return (
     <div style={{
-      // 여기에 동적 스타일을 작성하세요
+      // 카드 스타일을 작성하세요
     }}>
-      {/* 제목과 내용을 표시하세요 */}
+      {/* 로고 영역 */}
+      <div style={{
+        // 로고 박스 스타일
+      }}>
+        A
+      </div>
+      {/* 명함 정보들을 작성하세요 */}
     </div>
   );
 }`,
     },
     2: {
-      title: "문제 H-2: 상태 기반 버튼 ⭐⭐",
-      description: "클릭 상태에 따라 텍스트와 스타일이 변하는 토글 버튼",
+      title: "문제 H-2: 가격표 컴포넌트 ⭐⭐",
+      description: "상품 가격과 할인 정보를 보여주는 컴포넌트",
       example: `// 요구사항:
-// - 처음에는 "구독하기" 텍스트, 회색 배경
-// - 클릭하면 "구독중" 텍스트, 파란색 배경
-// - 다시 클릭하면 원래 상태로 복원`,
-      hint: "useState를 사용해서 isSubscribed 상태를 관리하세요",
-      solution: `function ToggleButton() {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  return (
-    <button
-      onClick={() => setIsSubscribed(!isSubscribed)}
-      style={{
-        backgroundColor: isSubscribed ? '#3b82f6' : '#9ca3af',
-        color: 'white',
-        padding: '12px 24px',
-        border: 'none',
-        borderRadius: '6px',
-        cursor: 'pointer',
-        fontSize: '16px',
-        transition: 'background-color 0.3s ease'
-      }}
-    >
-      {isSubscribed ? '구독중' : '구독하기'}
-    </button>
-  );
-}`,
-      placeholder: `function ToggleButton() {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  return (
-    <button
-      onClick={() => setIsSubscribed(!isSubscribed)}
-      style={{
-        // 여기에 동적 스타일을 작성하세요
-      }}
-    >
-      {/* 동적 텍스트를 작성하세요 */}
-    </button>
-  );
-}`,
-    },
-    3: {
-      title: "문제 H-3: 사용자 프로필 컴포넌트 ⭐⭐⭐",
-      description: "여러 정보를 표시하고 기본값을 처리하는 프로필 컴포넌트",
-      example: `// 요구사항:
-// - name, job, location, avatar를 props로 받기
-// - avatar가 없으면 기본 이미지 사용
-// - location이 없으면 "위치 미공개" 표시
-// - 전체를 카드 형태로 디자인`,
-      hint: "|| 연산자를 사용해서 기본값을 처리하세요",
-      solution: `function UserProfile({ name, job, location, avatar }) {
-  const defaultAvatar = "https://via.placeholder.com/60x60?text=👤";
-  
+// - 상품명: "디자인 시스템 템플릿"
+// - 원가: 50,000원 (취소선)
+// - 할인가: 39,000원 (큰 글씨, 파란색)
+// - 할인율: 22% (빨간 배지)`,
+      hint: "span 태그와 textDecoration 스타일을 활용하세요",
+      solution: `function PriceCard() {
   return (
     <div style={{
-      backgroundColor: 'white',
       padding: '20px',
-      borderRadius: '12px',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px'
+      border: '1px solid #e5e7eb',
+      borderRadius: '8px',
+      backgroundColor: 'white'
     }}>
-      <img 
-        src={avatar || defaultAvatar} 
-        alt="프로필"
-        style={{
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          objectFit: 'cover'
-        }}
-      />
-      <div>
-        <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 'bold' }}>
-          {name}
-        </h3>
-        <p style={{ margin: '0 0 4px 0', color: '#666', fontSize: '14px' }}>
-          {job}
-        </p>
-        <p style={{ margin: 0, color: '#999', fontSize: '12px' }}>
-          📍 {location || "위치 미공개"}
-        </p>
+      <h3 style={{ margin: '0 0 16px 0', fontSize: '18px' }}>디자인 시스템 템플릿</h3>
+      <div style={{ marginBottom: '8px' }}>
+        <span style={{
+          textDecoration: 'line-through',
+          color: '#9ca3af',
+          marginRight: '8px'
+        }}>
+          50,000원
+        </span>
+        <span style={{
+          backgroundColor: '#ef4444',
+          color: 'white',
+          padding: '2px 6px',
+          borderRadius: '4px',
+          fontSize: '12px'
+        }}>
+          22% 할인
+        </span>
+      </div>
+      <div style={{
+        fontSize: '24px',
+        fontWeight: 'bold',
+        color: '#3b82f6'
+      }}>
+        39,000원
       </div>
     </div>
   );
 }`,
-      placeholder: `function UserProfile({ name, job, location, avatar }) {
-  const defaultAvatar = "https://via.placeholder.com/60x60?text=👤";
-  
+      placeholder: `function PriceCard() {
   return (
     <div style={{
       // 카드 스타일을 작성하세요
     }}>
-      {/* 프로필 이미지와 정보를 표시하세요 */}
+      <h3>디자인 시스템 템플릿</h3>
+      {/* 가격 정보를 작성하세요 */}
+    </div>
+  );
+}`,
+    },
+    3: {
+      title: "문제 H-3: 알림 메시지 컴포넌트 ⭐⭐",
+      description: "성공, 경고, 에러 3가지 타입의 알림 메시지",
+      example: `// 요구사항:
+// - 성공 메시지: 초록색 배경, "저장되었습니다!"
+// - 경고 메시지: 노란색 배경, "주의가 필요합니다"
+// - 에러 메시지: 빨간색 배경, "오류가 발생했습니다"
+// - 각각 적절한 아이콘(✅, ⚠️, ❌)`,
+      hint: "3개의 div를 만들고 각각 다른 배경색을 적용하세요",
+      solution: `function AlertMessages() {
+  return (
+    <div>
+      <div style={{
+        backgroundColor: '#dcfce7',
+        border: '1px solid #bbf7d0',
+        color: '#166534',
+        padding: '12px 16px',
+        borderRadius: '6px',
+        marginBottom: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px'
+      }}>
+        <span>✅</span>
+        <span>저장되었습니다!</span>
+      </div>
+      
+      <div style={{
+        backgroundColor: '#fef3c7',
+        border: '1px solid #fed7aa',
+        color: '#92400e',
+        padding: '12px 16px',
+        borderRadius: '6px',
+        marginBottom: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px'
+      }}>
+        <span>⚠️</span>
+        <span>주의가 필요합니다</span>
+      </div>
+      
+      <div style={{
+        backgroundColor: '#fee2e2',
+        border: '1px solid #fecaca',
+        color: '#dc2626',
+        padding: '12px 16px',
+        borderRadius: '6px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px'
+      }}>
+        <span>❌</span>
+        <span>오류가 발생했습니다</span>
+      </div>
+    </div>
+  );
+}`,
+      placeholder: `function AlertMessages() {
+  return (
+    <div>
+      {/* 성공 메시지 */}
+      <div style={{
+        // 초록색 스타일을 작성하세요
+      }}>
+        <span>✅</span>
+        <span>저장되었습니다!</span>
+      </div>
+      
+      {/* 경고와 에러 메시지도 작성하세요 */}
     </div>
   );
 }`,
     },
     4: {
-      title: "문제 H-4: 동적 리스트 컴포넌트 ⭐⭐⭐",
-      description: "배열 데이터를 받아서 목록을 렌더링하는 컴포넌트",
+      title: "문제 H-4: 팀원 소개 카드 ⭐⭐⭐",
+      description: "프로필 사진, 이름, 역할이 있는 팀원 카드 3개",
       example: `// 요구사항:
-// - items 배열을 props로 받기
-// - 각 item은 {id, text, completed} 구조
-// - completed가 true면 텍스트에 취소선
-// - 빈 목록일 때 "할 일이 없습니다" 표시`,
-      hint: "map() 함수와 조건부 렌더링을 함께 사용하세요",
-      solution: `function TodoList({ items }) {
-  if (!items || items.length === 0) {
-    return (
-      <div style={{
-        padding: '40px 20px',
-        textAlign: 'center',
-        color: '#999',
-        fontSize: '16px'
-      }}>
-        할 일이 없습니다
-      </div>
-    );
-  }
-
+// - 3명의 팀원 카드를 가로로 나열
+// - 각 카드: 프로필 이미지, 이름, 역할, 소개
+// - 호버 시 살짝 올라가는 효과
+// - 통일된 디자인`,
+      hint: "display: flex를 사용해서 카드들을 나란히 배치하세요",
+      solution: `function TeamCards() {
   return (
     <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      padding: '16px'
+      display: 'flex',
+      gap: '20px',
+      justifyContent: 'center',
+      flexWrap: 'wrap'
     }}>
-      {items.map(item => (
-        <div key={item.id} style={{
-          padding: '12px 0',
-          borderBottom: '1px solid #f0f0f0',
+      <div style={{
+        width: '200px',
+        padding: '20px',
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        textAlign: 'center',
+        transition: 'transform 0.3s ease'
+      }}>
+        <div style={{
+          width: '80px',
+          height: '80px',
+          backgroundColor: '#f3f4f6',
+          borderRadius: '50%',
+          margin: '0 auto 16px',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '32px'
         }}>
-          <span style={{
-            textDecoration: item.completed ? 'line-through' : 'none',
-            color: item.completed ? '#999' : '#333',
-            fontSize: '16px'
-          }}>
-            {item.text}
-          </span>
+          👩‍💻
         </div>
-      ))}
+        <h3 style={{ margin: '0 0 4px 0' }}>김세진</h3>
+        <p style={{ margin: '0 0 8px 0', color: '#6b7280', fontSize: '14px' }}>UI/UX 디자이너</p>
+        <p style={{ margin: 0, color: '#9ca3af', fontSize: '12px' }}>사용자 경험을 개선합니다</p>
+      </div>
+      
+      <div style={{
+        width: '200px',
+        padding: '20px',
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        textAlign: 'center',
+        transition: 'transform 0.3s ease'
+      }}>
+        <div style={{
+          width: '80px',
+          height: '80px',
+          backgroundColor: '#f3f4f6',
+          borderRadius: '50%',
+          margin: '0 auto 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '32px'
+        }}>
+          👨‍💻
+        </div>
+        <h3 style={{ margin: '0 0 4px 0' }}>이민수</h3>
+        <p style={{ margin: '0 0 8px 0', color: '#6b7280', fontSize: '14px' }}>프론트엔드 개발자</p>
+        <p style={{ margin: 0, color: '#9ca3af', fontSize: '12px' }}>React로 UI를 구현합니다</p>
+      </div>
+      
+      <div style={{
+        width: '200px',
+        padding: '20px',
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        textAlign: 'center',
+        transition: 'transform 0.3s ease'
+      }}>
+        <div style={{
+          width: '80px',
+          height: '80px',
+          backgroundColor: '#f3f4f6',
+          borderRadius: '50%',
+          margin: '0 auto 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '32px'
+        }}>
+          👩‍💼
+        </div>
+        <h3 style={{ margin: '0 0 4px 0' }}>박지영</h3>
+        <p style={{ margin: '0 0 8px 0', color: '#6b7280', fontSize: '14px' }}>프로젝트 매니저</p>
+        <p style={{ margin: 0, color: '#9ca3af', fontSize: '12px' }}>프로젝트를 관리합니다</p>
+      </div>
     </div>
   );
 }`,
-      placeholder: `function TodoList({ items }) {
-  if (!items || items.length === 0) {
-    return (
-      <div>
-        {/* 빈 목록 메시지를 작성하세요 */}
-      </div>
-    );
-  }
-
+      placeholder: `function TeamCards() {
   return (
-    <div>
-      {/* map을 사용해서 리스트를 렌더링하세요 */}
-      {items.map(item => (
-        
-      ))}
+    <div style={{
+      display: 'flex',
+      gap: '20px',
+      // 가로 정렬 스타일을 작성하세요
+    }}>
+      {/* 첫 번째 팀원 카드 */}
+      <div style={{
+        // 카드 스타일을 작성하세요
+      }}>
+        {/* 프로필 이미지 영역 */}
+        <div style={{
+          // 원형 이미지 스타일
+        }}>
+          👩‍💻
+        </div>
+        {/* 이름, 역할, 소개를 작성하세요 */}
+      </div>
+      
+      {/* 나머지 2명의 카드도 작성하세요 */}
     </div>
   );
 }`,
     },
     5: {
-      title: "문제 H-5: 인터랙티브 카운터 ⭐⭐⭐",
-      description: "증가/감소 버튼이 있는 카운터 컴포넌트",
+      title: "문제 H-5: 메뉴 네비게이션 ⭐⭐⭐",
+      description: "웹사이트 상단 메뉴 바 만들기",
       example: `// 요구사항:
-// - 현재 카운트 표시
-// - + 버튼으로 증가 (최대 10)
-// - - 버튼으로 감소 (최소 0)
-// - 버튼이 비활성화될 때 다른 스타일 적용`,
-      hint: "disabled 속성과 조건부 스타일링을 활용하세요",
-      solution: `function Counter() {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    if (count < 10) {
-      setCount(count + 1);
-    }
-  };
-
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
+// - 로고 영역 (왼쪽)
+// - 메뉴 항목들: 홈, 소개, 서비스, 연락처 (가운데)
+// - 로그인 버튼 (오른쪽)
+// - 전체를 가로로 배치`,
+      hint: "justify-content: space-between을 사용해서 양 끝과 가운데 배치하세요",
+      solution: `function Navigation() {
   return (
-    <div style={{
+    <nav style={{
       display: 'flex',
       alignItems: 'center',
-      gap: '16px',
-      padding: '20px',
+      justifyContent: 'space-between',
+      padding: '16px 32px',
       backgroundColor: 'white',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      borderBottom: '1px solid #e5e7eb'
     }}>
-      <button
-        onClick={decrement}
-        disabled={count === 0}
-        style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: 'none',
-          backgroundColor: count === 0 ? '#e5e7eb' : '#ef4444',
-          color: count === 0 ? '#9ca3af' : 'white',
-          fontSize: '20px',
-          cursor: count === 0 ? 'not-allowed' : 'pointer'
-        }}
-      >
-        -
-      </button>
-      
-      <span style={{
+      {/* 로고 */}
+      <div style={{
         fontSize: '24px',
         fontWeight: 'bold',
-        minWidth: '40px',
-        textAlign: 'center'
+        color: '#3b82f6'
       }}>
-        {count}
-      </span>
+        MyCompany
+      </div>
       
-      <button
-        onClick={increment}
-        disabled={count === 10}
-        style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: 'none',
-          backgroundColor: count === 10 ? '#e5e7eb' : '#10b981',
-          color: count === 10 ? '#9ca3af' : 'white',
-          fontSize: '20px',
-          cursor: count === 10 ? 'not-allowed' : 'pointer'
-        }}
-      >
-        +
+      {/* 메뉴 */}
+      <div style={{
+        display: 'flex',
+        gap: '32px'
+      }}>
+        <a href="#" style={{ textDecoration: 'none', color: '#374151' }}>홈</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#374151' }}>소개</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#374151' }}>서비스</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#374151' }}>연락처</a>
+      </div>
+      
+      {/* 로그인 버튼 */}
+      <button style={{
+        backgroundColor: '#3b82f6',
+        color: 'white',
+        padding: '8px 16px',
+        border: 'none',
+        borderRadius: '6px',
+        cursor: 'pointer'
+      }}>
+        로그인
       </button>
-    </div>
+    </nav>
   );
 }`,
-      placeholder: `function Counter() {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    // 증가 로직을 작성하세요
-  };
-
-  const decrement = () => {
-    // 감소 로직을 작성하세요
-  };
-
+      placeholder: `function Navigation() {
   return (
-    <div>
-      {/* 카운터 UI를 작성하세요 */}
-    </div>
+    <nav style={{
+      display: 'flex',
+      // 네비게이션 스타일을 작성하세요
+    }}>
+      {/* 로고 */}
+      <div>
+        MyCompany
+      </div>
+      
+      {/* 메뉴들을 작성하세요 */}
+      
+      {/* 로그인 버튼을 작성하세요 */}
+    </nav>
   );
 }`,
     },
     6: {
-      title: "문제 H-6: 탭 컴포넌트 ⭐⭐⭐⭐",
-      description: "여러 탭을 전환할 수 있는 탭 컴포넌트",
+      title: "문제 H-6: 상품 목록 ⭐⭐⭐",
+      description: "3개의 상품을 그리드로 배치한 상품 목록",
       example: `// 요구사항:
-// - tabs 배열을 props로 받기 (각 탭은 {id, label, content})
-// - 활성 탭은 다른 스타일로 표시
-// - 탭을 클릭하면 해당 내용 표시`,
-      hint: "activeTab 상태로 현재 탭을 관리하세요",
-      solution: `function TabComponent({ tabs }) {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.id || null);
-
+// - 3개의 상품 카드
+// - 각 카드: 이미지 영역(색상 박스), 제목, 가격
+// - 그리드 레이아웃으로 배치
+// - 깔끔한 카드 디자인`,
+      hint: "display: grid를 사용해서 상품들을 배치하세요",
+      solution: `function ProductList() {
   return (
     <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      overflow: 'hidden',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: '20px',
+      padding: '20px'
     }}>
-      {/* 탭 헤더 */}
       <div style={{
-        display: 'flex',
-        borderBottom: '1px solid #e5e7eb'
+        border: '1px solid #e5e7eb',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        backgroundColor: 'white'
       }}>
-        {tabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              flex: 1,
-              padding: '12px 16px',
-              border: 'none',
-              backgroundColor: activeTab === tab.id ? '#3b82f6' : '#f9fafb',
-              color: activeTab === tab.id ? 'white' : '#374151',
-              cursor: 'pointer',
-              borderBottom: activeTab === tab.id ? '2px solid #1d4ed8' : 'none',
-              fontSize: '14px',
-              fontWeight: activeTab === tab.id ? 'bold' : 'normal'
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+        <div style={{
+          width: '100%',
+          height: '200px',
+          backgroundColor: '#fecaca',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '48px'
+        }}>
+          📱
+        </div>
+        <div style={{ padding: '16px' }}>
+          <h3 style={{ margin: '0 0 8px 0' }}>스마트폰</h3>
+          <p style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#3b82f6' }}>
+            299,000원
+          </p>
+        </div>
       </div>
       
-      {/* 탭 내용 */}
       <div style={{
-        padding: '20px',
-        minHeight: '120px'
+        border: '1px solid #e5e7eb',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        backgroundColor: 'white'
       }}>
-        {tabs.map(tab => (
-          activeTab === tab.id && (
-            <div key={tab.id}>
-              {tab.content}
-            </div>
-          )
-        ))}
+        <div style={{
+          width: '100%',
+          height: '200px',
+          backgroundColor: '#fed7aa',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '48px'
+        }}>
+          💻
+        </div>
+        <div style={{ padding: '16px' }}>
+          <h3 style={{ margin: '0 0 8px 0' }}>노트북</h3>
+          <p style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#3b82f6' }}>
+            899,000원
+          </p>
+        </div>
+      </div>
+      
+      <div style={{
+        border: '1px solid #e5e7eb',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        backgroundColor: 'white'
+      }}>
+        <div style={{
+          width: '100%',
+          height: '200px',
+          backgroundColor: '#c7d2fe',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '48px'
+        }}>
+          🎧
+        </div>
+        <div style={{ padding: '16px' }}>
+          <h3 style={{ margin: '0 0 8px 0' }}>헤드폰</h3>
+          <p style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#3b82f6' }}>
+            199,000원
+          </p>
+        </div>
       </div>
     </div>
   );
 }`,
-      placeholder: `function TabComponent({ tabs }) {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.id || null);
-
+      placeholder: `function ProductList() {
   return (
-    <div>
-      {/* 탭 헤더를 렌더링하세요 */}
-      <div>
-        {tabs.map(tab => (
-          
-        ))}
+    <div style={{
+      display: 'grid',
+      // 그리드 레이아웃을 작성하세요
+    }}>
+      {/* 첫 번째 상품 */}
+      <div style={{
+        // 카드 스타일을 작성하세요
+      }}>
+        <div style={{
+          // 이미지 영역 스타일
+        }}>
+          📱
+        </div>
+        <div>
+          {/* 제목과 가격을 작성하세요 */}
+        </div>
       </div>
       
-      {/* 활성 탭의 내용을 표시하세요 */}
-      <div>
-        
-      </div>
+      {/* 나머지 상품들도 작성하세요 */}
     </div>
   );
 }`,
     },
     7: {
-      title: "문제 H-7: 검색 입력창 ⭐⭐⭐⭐",
-      description: "실시간 검색 기능이 있는 입력창 컴포넌트",
+      title: "문제 H-7: 통계 대시보드 ⭐⭐⭐⭐",
+      description: "4개의 통계 카드가 있는 대시보드",
       example: `// 요구사항:
-// - 검색어를 입력하면 실시간으로 필터링
-// - items 배열에서 name이 포함된 항목만 표시
-// - 검색 결과가 없으면 "검색 결과가 없습니다" 표시`,
-      hint: "filter() 메서드와 includes()를 사용하세요",
-      solution: `function SearchInput({ items }) {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredItems = items.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+// - 4개의 통계 카드 (방문자, 주문, 매출, 고객)
+// - 각 카드: 아이콘, 제목, 숫자, 증감률
+// - 2x2 그리드 레이아웃
+// - 시각적으로 구분되는 색상`,
+      hint: "grid-template-columns: repeat(2, 1fr)로 2열 그리드를 만드세요",
+      solution: `function Dashboard() {
   return (
     <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      padding: '16px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '20px',
+      padding: '20px'
     }}>
-      <input
-        type="text"
-        placeholder="검색어를 입력하세요..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{
-          width: '100%',
-          padding: '12px',
-          border: '1px solid #d1d5db',
-          borderRadius: '6px',
-          fontSize: '16px',
-          marginBottom: '16px'
-        }}
-      />
-      
-      <div>
-        {filteredItems.length === 0 ? (
-          <div style={{
-            textAlign: 'center',
-            color: '#6b7280',
-            padding: '20px'
-          }}>
-            검색 결과가 없습니다
+      <div style={{
+        backgroundColor: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderLeft: '4px solid #3b82f6'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '14px' }}>총 방문자</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: 'bold' }}>12,345</p>
+            <p style={{ margin: 0, color: '#10b981', fontSize: '12px' }}>+12% 증가</p>
           </div>
-        ) : (
-          filteredItems.map(item => (
-            <div key={item.id} style={{
-              padding: '8px 12px',
-              borderBottom: '1px solid #f3f4f6',
-              fontSize: '14px'
-            }}>
-              <strong>{item.name}</strong>
-              {item.description && (
-                <div style={{ color: '#6b7280', fontSize: '12px', marginTop: '4px' }}>
-                  {item.description}
-                </div>
-              )}
-            </div>
-          ))
-        )}
+          <div style={{ fontSize: '32px' }}>👥</div>
+        </div>
+      </div>
+      
+      <div style={{
+        backgroundColor: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderLeft: '4px solid #10b981'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '14px' }}>총 주문</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: 'bold' }}>1,234</p>
+            <p style={{ margin: 0, color: '#10b981', fontSize: '12px' }}>+8% 증가</p>
+          </div>
+          <div style={{ fontSize: '32px' }}>📦</div>
+        </div>
+      </div>
+      
+      <div style={{
+        backgroundColor: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderLeft: '4px solid #f59e0b'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '14px' }}>총 매출</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: 'bold' }}>₩5.6M</p>
+            <p style={{ margin: 0, color: '#ef4444', fontSize: '12px' }}>-3% 감소</p>
+          </div>
+          <div style={{ fontSize: '32px' }}>💰</div>
+        </div>
+      </div>
+      
+      <div style={{
+        backgroundColor: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        borderLeft: '4px solid #8b5cf6'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '14px' }}>신규 고객</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '32px', fontWeight: 'bold' }}>89</p>
+            <p style={{ margin: 0, color: '#10b981', fontSize: '12px' }}>+15% 증가</p>
+          </div>
+          <div style={{ fontSize: '32px' }}>⭐</div>
+        </div>
       </div>
     </div>
   );
 }`,
-      placeholder: `function SearchInput({ items }) {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredItems = items.filter(item =>
-    // 검색 로직을 작성하세요
-  );
-
+      placeholder: `function Dashboard() {
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="검색어를 입력하세요..."
-        // input 이벤트를 처리하세요
-      />
-      
-      <div>
-        {/* 필터링된 결과를 표시하세요 */}
+    <div style={{
+      display: 'grid',
+      // 2x2 그리드를 작성하세요
+    }}>
+      {/* 방문자 카드 */}
+      <div style={{
+        // 카드 스타일을 작성하세요
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <p>총 방문자</p>
+            <p>12,345</p>
+            <p>+12% 증가</p>
+          </div>
+          <div>👥</div>
+        </div>
       </div>
+      
+      {/* 나머지 3개 카드도 작성하세요 */}
     </div>
   );
 }`,
     },
     8: {
-      title: "문제 H-8: 모달 컴포넌트 ⭐⭐⭐⭐",
-      description: "열기/닫기가 가능한 모달 컴포넌트",
+      title: "문제 H-8: 피처 소개 섹션 ⭐⭐⭐⭐",
+      description: "3개의 주요 기능을 소개하는 섹션",
       example: `// 요구사항:
-// - isOpen prop으로 모달 표시/숨김 제어
-// - 배경 클릭하거나 X 버튼으로 닫기
-// - onClose 콜백 함수 호출`,
-      hint: "조건부 렌더링과 이벤트 핸들링을 활용하세요",
-      solution: `function Modal({ isOpen, onClose, title, children }) {
-  if (!isOpen) return null;
-
+// - 제목: "주요 기능"
+// - 3개의 피처 카드 (디자인, 개발, 배포)
+// - 각 카드: 아이콘, 제목, 설명
+// - 가로 배치`,
+      hint: "섹션 전체를 감싸는 div와 카드들을 감싸는 div를 따로 만드세요",
+      solution: `function FeatureSection() {
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    <section style={{
+      padding: '60px 20px',
+      backgroundColor: '#f9fafb',
+      textAlign: 'center'
+    }}>
+      <h2 style={{
+        fontSize: '36px',
+        fontWeight: 'bold',
+        marginBottom: '16px',
+        color: '#1f2937'
+      }}>
+        주요 기능
+      </h2>
+      <p style={{
+        fontSize: '18px',
+        color: '#6b7280',
+        marginBottom: '48px'
+      }}>
+        우리 서비스의 핵심 기능들을 소개합니다
+      </p>
+      
+      <div style={{
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000
-      }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          padding: '24px',
-          maxWidth: '500px',
-          width: '90%',
-          maxHeight: '80%',
-          overflow: 'auto',
-          position: 'relative'
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
+        gap: '32px',
+        flexWrap: 'wrap'
+      }}>
         <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '16px'
+          backgroundColor: 'white',
+          padding: '32px',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          width: '280px'
         }}>
-          <h2 style={{
-            margin: 0,
-            fontSize: '20px',
-            fontWeight: 'bold'
+          <div style={{
+            width: '64px',
+            height: '64px',
+            backgroundColor: '#dbeafe',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 20px',
+            fontSize: '28px'
           }}>
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: '24px',
-              cursor: 'pointer',
-              color: '#6b7280'
-            }}
-          >
-            ×
-          </button>
+            🎨
+          </div>
+          <h3 style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '12px'
+          }}>
+            디자인
+          </h3>
+          <p style={{
+            color: '#6b7280',
+            lineHeight: '1.6'
+          }}>
+            직관적이고 아름다운 사용자 인터페이스를 제공합니다
+          </p>
         </div>
-        <div>
-          {children}
+        
+        <div style={{
+          backgroundColor: 'white',
+          padding: '32px',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          width: '280px'
+        }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            backgroundColor: '#d1fae5',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 20px',
+            fontSize: '28px'
+          }}>
+            ⚙️
+          </div>
+          <h3 style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '12px'
+          }}>
+            개발
+          </h3>
+          <p style={{
+            color: '#6b7280',
+            lineHeight: '1.6'
+          }}>
+            최신 기술로 안정적이고 빠른 서비스를 구축합니다
+          </p>
+        </div>
+        
+        <div style={{
+          backgroundColor: 'white',
+          padding: '32px',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          width: '280px'
+        }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            backgroundColor: '#fef3c7',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 20px',
+            fontSize: '28px'
+          }}>
+            🚀
+          </div>
+          <h3 style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '12px'
+          }}>
+            배포
+          </h3>
+          <p style={{
+            color: '#6b7280',
+            lineHeight: '1.6'
+          }}>
+            클라우드 기반으로 안전하고 확장 가능한 배포를 제공합니다
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }`,
-      placeholder: `function Modal({ isOpen, onClose, title, children }) {
-  if (!isOpen) return null;
-
+      placeholder: `function FeatureSection() {
   return (
-    <div
-      style={{
-        // 오버레이 스타일을 작성하세요
-      }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          // 모달 컨텐츠 스타일을 작성하세요
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* 헤더와 내용을 작성하세요 */}
+    <section style={{
+      // 섹션 스타일을 작성하세요
+    }}>
+      <h2>주요 기능</h2>
+      <p>우리 서비스의 핵심 기능들을 소개합니다</p>
+      
+      <div style={{
+        display: 'flex',
+        // 카드들을 가로 배치하는 스타일을 작성하세요
+      }}>
+        {/* 디자인 카드 */}
+        <div style={{
+          // 카드 스타일을 작성하세요
+        }}>
+          <div style={{
+            // 아이콘 원형 배경 스타일
+          }}>
+            🎨
+          </div>
+          <h3>디자인</h3>
+          <p>직관적이고 아름다운 사용자 인터페이스를 제공합니다</p>
+        </div>
+        
+        {/* 나머지 2개 카드도 작성하세요 */}
       </div>
-    </div>
+    </section>
   );
 }`,
     },
     9: {
-      title: "문제 H-9: 드롭다운 메뉴 ⭐⭐⭐⭐⭐",
-      description: "클릭으로 열고 닫을 수 있는 드롭다운 메뉴",
+      title: "문제 H-9: 연락처 폼 ⭐⭐⭐⭐⭐",
+      description: "이름, 이메일, 메시지 입력이 있는 연락처 폼",
       example: `// 요구사항:
-// - 메뉴 버튼 클릭 시 옵션 목록 표시/숨김
-// - 옵션 클릭 시 선택된 값 표시하고 메뉴 닫기
-// - 외부 클릭 시 메뉴 자동 닫기`,
-      hint: "useRef와 useEffect를 사용해서 외부 클릭을 감지하세요",
-      solution: `function Dropdown({ options, onSelect, placeholder = "선택하세요" }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    if (onSelect) {
-      onSelect(option);
-    }
-  };
-
+// - 폼 제목: "연락하기"
+// - 입력 필드: 이름, 이메일, 메시지(textarea)
+// - 전송 버튼
+// - 깔끔한 폼 디자인`,
+      hint: "form 태그를 사용하고 input과 textarea를 스타일링하세요",
+      solution: `function ContactForm() {
   return (
-    <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-block' }}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        style={{
-          padding: '12px 16px',
-          border: '1px solid #d1d5db',
-          borderRadius: '6px',
-          backgroundColor: 'white',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          minWidth: '200px'
-        }}
-      >
-        <span>{selectedOption ? selectedOption.label : placeholder}</span>
-        <span style={{ marginLeft: '8px' }}>{isOpen ? '▲' : '▼'}</span>
-      </button>
-
-      {isOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          backgroundColor: 'white',
-          border: '1px solid #d1d5db',
-          borderRadius: '6px',
-          marginTop: '4px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          zIndex: 10
-        }}>
-          {options.map((option) => (
-            <div
-              key={option.value}
-              onClick={() => handleOptionClick(option)}
-              style={{
-                padding: '12px 16px',
-                cursor: 'pointer',
-                borderBottom: '1px solid #f3f4f6',
-                ':hover': {
-                  backgroundColor: '#f9fafb'
-                }
-              }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#f9fafb'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
-            >
-              {option.label}
-            </div>
-          ))}
+    <div style={{
+      backgroundColor: 'white',
+      padding: '40px',
+      borderRadius: '12px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+      maxWidth: '500px',
+      margin: '0 auto'
+    }}>
+      <h2 style={{
+        fontSize: '28px',
+        fontWeight: 'bold',
+        marginBottom: '24px',
+        textAlign: 'center',
+        color: '#1f2937'
+      }}>
+        연락하기
+      </h2>
+      
+      <form>
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '8px',
+            fontWeight: '500',
+            color: '#374151'
+          }}>
+            이름
+          </label>
+          <input
+            type="text"
+            style={{
+              width: '100%',
+              padding: '12px',
+              border: '1px solid #d1d5db',
+              borderRadius: '6px',
+              fontSize: '16px',
+              boxSizing: 'border-box'
+            }}
+            placeholder="이름을 입력하세요"
+          />
         </div>
-      )}
+        
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '8px',
+            fontWeight: '500',
+            color: '#374151'
+          }}>
+            이메일
+          </label>
+          <input
+            type="email"
+            style={{
+              width: '100%',
+              padding: '12px',
+              border: '1px solid #d1d5db',
+              borderRadius: '6px',
+              fontSize: '16px',
+              boxSizing: 'border-box'
+            }}
+            placeholder="이메일을 입력하세요"
+          />
+        </div>
+        
+        <div style={{ marginBottom: '24px' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '8px',
+            fontWeight: '500',
+            color: '#374151'
+          }}>
+            메시지
+          </label>
+          <textarea
+            rows={5}
+            style={{
+              width: '100%',
+              padding: '12px',
+              border: '1px solid #d1d5db',
+              borderRadius: '6px',
+              fontSize: '16px',
+              resize: 'vertical',
+              boxSizing: 'border-box'
+            }}
+            placeholder="메시지를 입력하세요"
+          />
+        </div>
+        
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            padding: '14px',
+            border: 'none',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer'
+          }}
+        >
+          전송하기
+        </button>
+      </form>
     </div>
   );
 }`,
-      placeholder: `function Dropdown({ options, onSelect, placeholder = "선택하세요" }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    // 외부 클릭 감지 로직을 작성하세요
-  }, []);
-
-  const handleOptionClick = (option) => {
-    // 옵션 선택 로직을 작성하세요
-  };
-
+      placeholder: `function ContactForm() {
   return (
-    <div ref={dropdownRef}>
-      {/* 드롭다운 UI를 작성하세요 */}
+    <div style={{
+      // 폼 컨테이너 스타일을 작성하세요
+    }}>
+      <h2>연락하기</h2>
+      
+      <form>
+        <div>
+          <label>이름</label>
+          <input
+            type="text"
+            style={{
+              // 입력 필드 스타일을 작성하세요
+            }}
+            placeholder="이름을 입력하세요"
+          />
+        </div>
+        
+        {/* 이메일과 메시지 필드도 작성하세요 */}
+        
+        <button type="submit" style={{
+          // 버튼 스타일을 작성하세요
+        }}>
+          전송하기
+        </button>
+      </form>
     </div>
   );
 }`,
     },
     10: {
-      title: "문제 H-10: 종합 대시보드 ⭐⭐⭐⭐⭐",
-      description: "여러 컴포넌트를 조합한 간단한 대시보드",
+      title: "문제 H-10: 완전한 랜딩 페이지 ⭐⭐⭐⭐⭐",
+      description: "히어로 섹션, 기능 소개, CTA가 있는 미니 랜딩 페이지",
       example: `// 요구사항:
-// - 사용자 정보 카드 (이름, 직업)
-// - 통계 카드 3개 (각각 다른 색상)
-// - 최근 활동 목록 (5개 제한)
-// - 전체를 그리드 레이아웃으로 배치`,
-      hint: "이전에 만든 컴포넌트들을 재사용하고 조합하세요",
-      solution: `function Dashboard({ user, stats, activities }) {
+// - 히어로 섹션: 제목, 부제목, 버튼
+// - 기능 소개: 3개의 간단한 기능 카드
+// - CTA 섹션: 행동 유도 문구와 버튼
+// - 전체적으로 통일된 디자인`,
+      hint: "여러 섹션을 div로 나누고 각각 다른 배경색으로 구분하세요",
+      solution: `function LandingPage() {
   return (
-    <div style={{
-      padding: '20px',
-      backgroundColor: '#f9fafb',
-      minHeight: '100vh'
-    }}>
-      <h1 style={{
-        fontSize: '28px',
-        fontWeight: 'bold',
-        marginBottom: '24px',
-        color: '#1f2937'
+    <div>
+      {/* 히어로 섹션 */}
+      <section style={{
+        backgroundColor: '#1f2937',
+        color: 'white',
+        padding: '80px 20px',
+        textAlign: 'center'
       }}>
-        대시보드
-      </h1>
-
-      {/* 사용자 정보 */}
-      <div style={{
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '8px',
-        marginBottom: '20px',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-      }}>
-        <h2 style={{ margin: '0 0 8px 0', fontSize: '20px' }}>안녕하세요, {user.name}님!</h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>{user.job}</p>
-      </div>
-
-      {/* 통계 카드들 */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '16px',
-        marginBottom: '20px'
-      }}>
-        {stats.map((stat, index) => {
-          const colors = ['#3b82f6', '#10b981', '#f59e0b'];
-          return (
-            <div key={index} style={{
-              backgroundColor: 'white',
-              padding: '20px',
-              borderRadius: '8px',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-              borderLeft: \`4px solid \${colors[index % colors.length]}\`
-            }}>
-              <h3 style={{
-                margin: '0 0 8px 0',
-                fontSize: '14px',
-                color: '#6b7280',
-                textTransform: 'uppercase'
-              }}>
-                {stat.label}
-              </h3>
-              <p style={{
-                margin: 0,
-                fontSize: '24px',
-                fontWeight: 'bold',
-                color: colors[index % colors.length]
-              }}>
-                {stat.value}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* 최근 활동 */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        padding: '20px',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-      }}>
-        <h3 style={{
-          margin: '0 0 16px 0',
-          fontSize: '18px',
-          fontWeight: 'bold'
+        <h1 style={{
+          fontSize: '48px',
+          fontWeight: 'bold',
+          marginBottom: '16px'
         }}>
-          최근 활동
-        </h3>
-        <div>
-          {activities.slice(0, 5).map((activity, index) => (
-            <div key={index} style={{
-              padding: '12px 0',
-              borderBottom: index < 4 ? '1px solid #f3f4f6' : 'none',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
-              <span style={{ fontSize: '14px' }}>{activity.text}</span>
-              <span style={{ fontSize: '12px', color: '#6b7280' }}>{activity.time}</span>
-            </div>
-          ))}
+          혁신적인 디자인 툴
+        </h1>
+        <p style={{
+          fontSize: '20px',
+          marginBottom: '32px',
+          color: '#d1d5db'
+        }}>
+          더 쉽고 빠르게 아름다운 디자인을 만들어보세요
+        </p>
+        <button style={{
+          backgroundColor: '#3b82f6',
+          color: 'white',
+          padding: '16px 32px',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '18px',
+          fontWeight: '500',
+          cursor: 'pointer'
+        }}>
+          무료로 시작하기
+        </button>
+      </section>
+      
+      {/* 기능 소개 */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        padding: '60px 20px',
+        textAlign: 'center'
+      }}>
+        <h2 style={{
+          fontSize: '32px',
+          fontWeight: 'bold',
+          marginBottom: '48px',
+          color: '#1f2937'
+        }}>
+          핵심 기능
+        </h2>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '24px',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '24px',
+            borderRadius: '12px',
+            width: '200px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🎨</div>
+            <h3 style={{ marginBottom: '8px' }}>쉬운 디자인</h3>
+            <p style={{ color: '#6b7280', fontSize: '14px' }}>드래그 앤 드롭으로 간편하게</p>
+          </div>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '24px',
+            borderRadius: '12px',
+            width: '200px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{ fontSize: '32px', marginBottom: '16px' }}>⚡</div>
+            <h3 style={{ marginBottom: '8px' }}>빠른 속도</h3>
+            <p style={{ color: '#6b7280', fontSize: '14px' }}>실시간으로 결과 확인</p>
+          </div>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '24px',
+            borderRadius: '12px',
+            width: '200px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🤝</div>
+            <h3 style={{ marginBottom: '8px' }}>팀 협업</h3>
+            <p style={{ color: '#6b7280', fontSize: '14px' }}>동시에 함께 작업</p>
+          </div>
         </div>
-      </div>
+      </section>
+      
+      {/* CTA 섹션 */}
+      <section style={{
+        backgroundColor: '#3b82f6',
+        color: 'white',
+        padding: '60px 20px',
+        textAlign: 'center'
+      }}>
+        <h2 style={{
+          fontSize: '32px',
+          fontWeight: 'bold',
+          marginBottom: '16px'
+        }}>
+          지금 바로 시작하세요
+        </h2>
+        <p style={{
+          fontSize: '18px',
+          marginBottom: '32px',
+          opacity: 0.9
+        }}>
+          무료 체험으로 모든 기능을 경험해보세요
+        </p>
+        <button style={{
+          backgroundColor: 'white',
+          color: '#3b82f6',
+          padding: '16px 32px',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '18px',
+          fontWeight: '500',
+          cursor: 'pointer'
+        }}>
+          무료 체험 시작
+        </button>
+      </section>
     </div>
   );
 }`,
-      placeholder: `function Dashboard({ user, stats, activities }) {
+      placeholder: `function LandingPage() {
   return (
-    <div style={{
-      // 대시보드 전체 스타일을 작성하세요
-    }}>
-      <h1>대시보드</h1>
-
-      {/* 사용자 정보 카드 */}
-      <div>
-        
-      </div>
-
-      {/* 통계 카드들 - 그리드 레이아웃 */}
-      <div style={{
-        display: 'grid',
-        // 그리드 스타일을 작성하세요
+    <div>
+      {/* 히어로 섹션 */}
+      <section style={{
+        backgroundColor: '#1f2937',
+        // 히어로 섹션 스타일을 작성하세요
       }}>
-        {stats.map((stat, index) => (
-          
-        ))}
-      </div>
-
-      {/* 최근 활동 목록 */}
-      <div>
-        
-      </div>
+        <h1>혁신적인 디자인 툴</h1>
+        <p>더 쉽고 빠르게 아름다운 디자인을 만들어보세요</p>
+        <button>무료로 시작하기</button>
+      </section>
+      
+      {/* 기능 소개 */}
+      <section style={{
+        backgroundColor: '#f9fafb',
+        // 기능 소개 섹션 스타일을 작성하세요
+      }}>
+        <h2>핵심 기능</h2>
+        <div style={{
+          display: 'flex',
+          // 기능 카드들 배치 스타일을 작성하세요
+        }}>
+          {/* 3개의 기능 카드를 작성하세요 */}
+        </div>
+      </section>
+      
+      {/* CTA 섹션 */}
+      <section style={{
+        backgroundColor: '#3b82f6',
+        // CTA 섹션 스타일을 작성하세요
+      }}>
+        <h2>지금 바로 시작하세요</h2>
+        <p>무료 체험으로 모든 기능을 경험해보세요</p>
+        <button>무료 체험 시작</button>
+      </section>
     </div>
   );
 }`,
@@ -852,57 +1160,57 @@ export function ExerciseHiddenLevel({ onComplete, onNext }: ExerciseProps) {
     const currentAnswer = userAnswers[`problem${currentProblem}` as keyof typeof userAnswers];
     let isCorrect = false;
 
-    // 각 문제별 답안 체크 로직
+    // 각 문제별 답안 체크 로직 (간단화)
     switch (currentProblem) {
       case 1:
-        isCorrect = currentAnswer.includes("DynamicCard") && 
-                   currentAnswer.includes("backgroundColor") && 
-                   currentAnswer.includes("border");
+        isCorrect = currentAnswer.includes("BusinessCard") && 
+                   currentAnswer.includes("김세진") && 
+                   currentAnswer.includes("UI/UX 디자이너");
         break;
       case 2:
-        isCorrect = currentAnswer.includes("ToggleButton") && 
-                   currentAnswer.includes("useState") && 
-                   currentAnswer.includes("isSubscribed");
+        isCorrect = currentAnswer.includes("PriceCard") && 
+                   currentAnswer.includes("textDecoration") && 
+                   currentAnswer.includes("50,000");
         break;
       case 3:
-        isCorrect = currentAnswer.includes("UserProfile") && 
-                   currentAnswer.includes("defaultAvatar") && 
-                   currentAnswer.includes("||");
+        isCorrect = currentAnswer.includes("AlertMessages") && 
+                   currentAnswer.includes("backgroundColor") && 
+                   currentAnswer.includes("✅");
         break;
       case 4:
-        isCorrect = currentAnswer.includes("TodoList") && 
-                   currentAnswer.includes("map") && 
-                   currentAnswer.includes("length === 0");
+        isCorrect = currentAnswer.includes("TeamCards") && 
+                   currentAnswer.includes("display: 'flex'") && 
+                   currentAnswer.includes("김세진");
         break;
       case 5:
-        isCorrect = currentAnswer.includes("Counter") && 
-                   currentAnswer.includes("increment") && 
-                   currentAnswer.includes("disabled");
+        isCorrect = currentAnswer.includes("Navigation") && 
+                   currentAnswer.includes("justify-content") && 
+                   currentAnswer.includes("MyCompany");
         break;
       case 6:
-        isCorrect = currentAnswer.includes("TabComponent") && 
-                   currentAnswer.includes("activeTab") && 
-                   currentAnswer.includes("setActiveTab");
+        isCorrect = currentAnswer.includes("ProductList") && 
+                   currentAnswer.includes("display: 'grid'") && 
+                   currentAnswer.includes("스마트폰");
         break;
       case 7:
-        isCorrect = currentAnswer.includes("SearchInput") && 
-                   currentAnswer.includes("filter") && 
-                   currentAnswer.includes("includes");
+        isCorrect = currentAnswer.includes("Dashboard") && 
+                   currentAnswer.includes("grid-template-columns") && 
+                   currentAnswer.includes("12,345");
         break;
       case 8:
-        isCorrect = currentAnswer.includes("Modal") && 
-                   currentAnswer.includes("stopPropagation") && 
-                   currentAnswer.includes("position: 'fixed'");
+        isCorrect = currentAnswer.includes("FeatureSection") && 
+                   currentAnswer.includes("section") && 
+                   currentAnswer.includes("주요 기능");
         break;
       case 9:
-        isCorrect = currentAnswer.includes("Dropdown") && 
-                   currentAnswer.includes("useRef") && 
-                   currentAnswer.includes("useEffect");
+        isCorrect = currentAnswer.includes("ContactForm") && 
+                   currentAnswer.includes("form") && 
+                   currentAnswer.includes("textarea");
         break;
       case 10:
-        isCorrect = currentAnswer.includes("Dashboard") && 
-                   currentAnswer.includes("grid") && 
-                   currentAnswer.includes("map");
+        isCorrect = currentAnswer.includes("LandingPage") && 
+                   currentAnswer.includes("section") && 
+                   currentAnswer.includes("혁신적인 디자인 툴");
         break;
       default:
         isCorrect = false;
@@ -933,16 +1241,16 @@ export function ExerciseHiddenLevel({ onComplete, onNext }: ExerciseProps) {
             🎯 Hidden Level
           </span>
           <div className="flex">
-            {[1, 2, 3, 4, 5].map((i) => (
+            {[1, 2, 3].map((i) => (
               <span key={i} className="text-yellow-500">⭐</span>
             ))}
           </div>
           <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            종합 실전 문제
+            실전 응용 문제
           </h2>
         </div>
         <p className="text-gray-600">
-          Level 1~3에서 배운 모든 내용을 종합하여 실전 같은 컴포넌트를 만들어보세요!
+          Level 1~3에서 배운 JSX, 컴포넌트, 스타일링을 활용해서 실제 웹사이트에서 볼 수 있는 컴포넌트들을 만들어보세요!
         </p>
         <div className="mt-4">
           <div className="flex gap-1 flex-wrap">
@@ -1016,11 +1324,11 @@ export function ExerciseHiddenLevel({ onComplete, onNext }: ExerciseProps) {
       <div className="mt-8 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
         <h4 className="font-bold mb-2 text-purple-800">🏆 Hidden Level 완료 체크리스트</h4>
         <ul className="list-disc ml-5 text-sm text-purple-700">
-          <li>JSX, 컴포넌트, 스타일링을 통합적으로 활용할 수 있다</li>
-          <li>실제 서비스에서 사용할 수 있는 수준의 컴포넌트를 만들 수 있다</li>
-          <li>복잡한 상태 관리와 이벤트 처리를 할 수 있다</li>
-          <li>사용자 경험을 고려한 인터랙티브 컴포넌트를 구현할 수 있다</li>
-          <li>여러 컴포넌트를 조합해서 완성도 높은 UI를 만들 수 있다</li>
+          <li>JSX 문법을 자유자재로 활용할 수 있다</li>
+          <li>컴포넌트 구조를 체계적으로 설계할 수 있다</li>
+          <li>인라인 스타일로 아름다운 디자인을 만들 수 있다</li>
+          <li>실제 웹사이트에 사용할 수 있는 수준의 컴포넌트를 구현할 수 있다</li>
+          <li>복잡한 레이아웃을 flexbox와 grid로 만들 수 있다</li>
         </ul>
       </div>
     </div>

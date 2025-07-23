@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CodeBlock, TipsBox } from "../../shared/ui";
+import { HiddenLevelBanner } from "./HiddenLevelBanner";
 
 interface ExerciseProps {
   onComplete: () => void;
@@ -9,6 +10,7 @@ interface ExerciseProps {
 export function Exercise3JSX({ onComplete, onNext }: ExerciseProps) {
   const [currentProblem, setCurrentProblem] = useState(1);
   const [showSolution, setShowSolution] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [userAnswers, setUserAnswers] = useState({
     problem1: "",
     problem2: "",
@@ -171,8 +173,8 @@ export function Exercise3JSX({ onComplete, onNext }: ExerciseProps) {
         setCurrentProblem((prev) => prev + 1);
         setShowSolution(false);
       } else {
+        setIsCompleted(true);
         onComplete();
-        onNext();
       }
     } else {
       alert("다시 한번 시도해보세요!");
@@ -180,6 +182,10 @@ export function Exercise3JSX({ onComplete, onNext }: ExerciseProps) {
   };
 
   const currentProb = problems[currentProblem as keyof typeof problems];
+
+  const handleStartHiddenLevel = () => {
+    window.location.href = '/hidden-level';
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -319,6 +325,11 @@ export function Exercise3JSX({ onComplete, onNext }: ExerciseProps) {
           <li>기본적인 인터랙션 스타일을 만들 수 있다</li>
         </ul>
       </div>
+
+      {/* Hidden Level 배너 - Level 3 완료 후에만 표시 */}
+      {isCompleted && (
+        <HiddenLevelBanner onStartHiddenLevel={handleStartHiddenLevel} />
+      )}
     </div>
   );
 }
