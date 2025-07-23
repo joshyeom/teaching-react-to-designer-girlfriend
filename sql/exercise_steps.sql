@@ -1,0 +1,42 @@
+
+CREATE TABLE exercise_steps (
+    id SERIAL PRIMARY KEY,
+    level INTEGER,
+    title TEXT,
+    difficulty INTEGER,
+    codesandbox_url TEXT,
+    description TEXT,
+    category TEXT
+);
+
+INSERT INTO exercise_steps (id, level, title, difficulty, codesandbox_url, description, category) VALUES
+(1, 1, 'JSX 변환하기', 1, 'https://codesandbox.io/p/sandbox/optimistic-mcnulty-dl8th3', 'HTML을 JSX로 변환하는 연습', 'JSX 기본 문법'),
+(2, 1, 'JavaScript 표현식 사용하기', 1, 'https://codesandbox.io/p/sandbox/practice1-2-sk6nkv', 'JSX에서 JavaScript 표현식 활용', 'JSX 기본 문법'),
+(3, 1, '계산된 값 표시하기', 1, 'https://codesandbox.io/p/sandbox/practice1-33-pk9tfn2', '동적 계산으로 값 표시하기', 'JSX 기본 문법'),
+(4, 2, '첫 번째 컴포넌트', 1, 'https://codesandbox.io/p/sandbox/practice2-1-yz4x3d', '간단한 컴포넌트 만들기', '정적 컴포넌트'),
+(5, 2, '프로필 카드 컴포넌트', 2, 'https://codesandbox.io/p/sandbox/practice2-2-xmzc62', '사용자 정보를 표시하는 카드 컴포넌트', '정적 컴포넌트'),
+(6, 2, '버튼 컴포넌트', 2, 'https://codesandbox.io/p/sandbox/practice2-3-ffw6pl', '다양한 스타일의 버튼 컴포넌트', '정적 컴포넌트'),
+(7, 3, '인라인 스타일 적용', 2, 'https://codesandbox.io/p/sandbox/practice3-1-qwdxpm', '인라인 스타일로 컴포넌트 꾸미기', '스타일링'),
+(8, 3, 'CSS 클래스 사용하기', 2, 'https://codesandbox.io/p/sandbox/practice3-2-g36cdf', 'CSS 클래스로 스타일 적용하기', '스타일링'),
+(9, 3, '호버 효과 버튼', 3, 'https://codesandbox.io/p/sandbox/practice3-3-ff296k', '호버 효과가 있는 인터랙티브 버튼', '스타일링'),
+(10, 4, '인사말 컴포넌트', 2, 'https://codesandbox.io/p/sandbox/practice4-1-48ph6p', 'Props를 활용한 인사말 컴포넌트', 'Props 기초'),
+(11, 4, '제목과 부제목 컴포넌트', 2, 'https://codesandbox.io/p/sandbox/practice4-2-nt6tmm', '여러 Props를 받는 헤더 컴포넌트', 'Props 기초'),
+(12, 4, '사용자 정보 카드', 3, 'https://codesandbox.io/p/sandbox/practice4-3-7wq2y8', '복합 Props를 활용한 사용자 카드', 'Props 기초'),
+(13, 5, '토글 가능한 알림', 3, 'https://codesandbox.io/p/sandbox/practice5-1-z99vjl', '조건부 렌더링으로 토글 알림', 'Props 심화'),
+(14, 5, '진행률 표시 바', 4, 'https://codesandbox.io/p/sandbox/practice5-2-7nvpgz', '동적 스타일링으로 진행률 표시', 'Props 심화'),
+(15, 5, '제품 가격 카드', 4, 'https://codesandbox.io/p/sandbox/practice5-3-scn2tk', '복합 데이터를 활용한 가격 카드', 'Props 심화'),
+(16, 6, '기본 래퍼 컴포넌트', 3, 'https://codesandbox.io/p/sandbox/practice6-1-q76wj6', 'Children을 활용한 래퍼 컴포넌트', 'Children Props'),
+(17, 6, '모달 컴포넌트', 4, 'https://codesandbox.io/p/sandbox/practice6-2-fvysxg', 'Children을 활용한 모달 컴포넌트', 'Children Props'),
+(18, 6, '레이아웃 컴포넌트', 4, 'https://codesandbox.io/p/sandbox/practice6-3-4rtdcy', '복합 Children을 활용한 레이아웃', 'Children Props'),
+(19, 7, '로그인 상태 표시', 3, 'https://codesandbox.io/p/sandbox/practice7-1-r425w6', '조건부 렌더링으로 로그인 상태 표시', '조건부 렌더링'),
+(20, 7, '메시지 뱃지', 4, 'https://codesandbox.io/p/sandbox/practice7-2-g9k3pk', '조건부 렌더링으로 메시지 뱃지', '조건부 렌더링'),
+(21, 7, '상품 상태 카드', 4, 'https://codesandbox.io/p/sandbox/practice7-3-hmsyh9', '복합 조건부 렌더링으로 상태 표시', '조건부 렌더링'),
+(22, 8, '간단한 목록 표시', 3, 'https://codesandbox.io/p/sandbox/practice8-1-plwqp9', 'map을 활용한 목록 렌더링', '리스트 렌더링'),
+(23, 8, '팀원 목록 카드', 4, 'https://codesandbox.io/p/sandbox/practice8-2-qskyjl', '객체 배열을 활용한 카드 목록', '리스트 렌더링'),
+(24, 8, '필터링 가능한 목록', 5, 'https://codesandbox.io/p/sandbox/practice8-3-3xvh2z', '필터링 기능이 있는 동적 목록', '리스트 렌더링'),
+(25, 9, '기본 상품 카드', 4, 'https://codesandbox.io/p/sandbox/practice9-1-f9qkqj', '복합 데이터를 활용한 상품 카드', '복합 컴포넌트'),
+(26, 9, '인터랙티브 상품 카드', 5, 'https://codesandbox.io/p/sandbox/practice9-2-z7ygr9', '고급 기능이 있는 상품 카드', '복합 컴포넌트'),
+(27, 9, '상품 카드 그리드', 5, 'https://codesandbox.io/p/sandbox/practice9-3-8snwgq', '여러 상품 카드를 그리드로 배열', '복합 컴포넌트'),
+(28, 10, '팀 소개 섹션', 6, 'https://codesandbox.io/p/sandbox/practice-10-1-nz4fm6', '완전한 팀 소개 페이지 섹션', '미니 프로젝트'),
+(29, 10, '가격 테이블', 6, 'https://codesandbox.io/p/sandbox/practice10-2-pclq2t', '인터랙티브 가격 테이블', '미니 프로젝트'),
+(30, 10, '블로그 포스트 목록', 7, 'https://codesandbox.io/p/sandbox/practice10-3-jf2xj5', '완전한 블로그 포스트 목록 페이지', '미니 프로젝트');

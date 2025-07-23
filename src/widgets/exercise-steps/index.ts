@@ -7,4 +7,5 @@ export { Exercise6Children } from "./Exercise6Children";
 export { Exercise7Lists } from "./Exercise7Lists";
 export { Exercise8Forms } from "./Exercise8Forms";
 export { Exercise9Styling } from "./Exercise9Styling";
-export { Exercise10MiniProject } from "./Exercise10MiniProject"; 
+export { Exercise10MiniProject } from "./Exercise10MiniProject";
+export { ExerciseHiddenLevel } from "./ExerciseHiddenLevel"; 
