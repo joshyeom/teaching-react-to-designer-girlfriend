@@ -31,6 +31,16 @@ const courses: Course[] = [
     badge: "도전",
     badgeColor: "#7C3AED",
   },
+  {
+    id: "react-use-state",
+    title: "React useState 마스터하기",
+    description:
+      "상태 관리의 핵심 원리를 이해하고 React의 리렌더링 메커니즘을 학습합니다. 인터랙티브한 예제로 배워보세요!",
+    thumbnail:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=240&fit=crop&crop=center",
+    badge: "NEW",
+    badgeColor: "#10B981",
+  },
 ];
 
 function CourseCard({
@@ -43,6 +53,9 @@ function CourseCard({
   const getPath = (courseId: string) => {
     if (courseId === "react-basics-exercise") {
       return "/exercise";
+    }
+    if (courseId === "react-use-state") {
+      return "/use-state";
     }
     return `/main`;
   };
@@ -227,7 +240,7 @@ function CourseSection({ isVisible }: { isVisible: boolean }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} isVisible={isVisible} />
           ))}

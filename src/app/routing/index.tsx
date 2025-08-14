@@ -3,6 +3,7 @@ import { LandingPage } from "~/pages/landing";
 import { MainPage } from "~/pages/main";
 import { ExercisePage } from "~/pages/exercise";
 import { MiniProjectPage } from "~/pages/mini-project";
+import { UseStatePage } from "~/pages/use-state";
 
 // 30개 문제 리스트
 export const exerciseProblems = [
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: "/mini-project",
     element: <MiniProjectPage />,
+  },
+  {
+    path: "/use-state",
+    element: <UseStatePage />,
   },
 ]);
 
